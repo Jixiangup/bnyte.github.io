@@ -5,6 +5,14 @@ Welcome to [Hexo](https://hexo.io/)! This is your very first post. Check [docume
 
 <!-- more -->
 
+``` java
+public class HelloWorld {
+    public static void main(String[] args) {
+        SpringApplication.run(HelloWorld.class);
+    }
+}
+```
+
 ## Quick Start
 
 ### Create a new post
