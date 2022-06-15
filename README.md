@@ -6,8 +6,20 @@
 yarn
 ```
 
+- build
+
+```
+yarn build
+```
+
+- clean
+
+```
+yarn clean
+```
+
 - start
 
 ```
-hexo s
+yarn server
 ```
