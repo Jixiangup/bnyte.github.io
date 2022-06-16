@@ -21,5 +21,5 @@ yarn clean
 - start
 
 ```
-yarn server
+yarn server | yarn start
 ```
