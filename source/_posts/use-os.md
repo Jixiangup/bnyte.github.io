@@ -17,8 +17,8 @@ tags: 连载
 ## 20220708之前
 
 - [Windows微信多开](#微信多开)
-- [科学使用Jetbrains](#科学使用Jetbrains)
 
+- [科学使用Jetbrains](#科学使用Jetbrains)
 
 # Windows
 
