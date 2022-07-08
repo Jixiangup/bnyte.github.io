@@ -52,7 +52,7 @@ start "" "D:\Tencent\WeChat\WeChat.exe" rem 需要多开的目标地址
 import urllib.request,os,hashlib; h = '2915d1851351e5ee549c20394736b442' + '8bc59f460fa1548d1514676163dafc88'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)
 ```
 
-- Preferences -> Browse Packages.....弹出目录后, 下载[插件](https://packagecontrol.io/Package Control.sublime-package)或访问浏览器下载`https://packagecontrol.io/Package Control.sublime-package`, 下载完成之后直接将其复制到刚刚打开的文件当中重启
+- Preferences -> Browse Packages.....弹出目录后, 下载[插件](https://packagecontrol.io/Package%20Control.sublime-package)或访问浏览器下载`https://packagecontrol.io/Package Control.sublime-package`, 下载完成之后直接将其复制到刚刚打开的文件当中重启
 
 - `Ctrl+Shift+P`调出命令面板输入`install package`按回车等待弹出新的控制弹窗
 
