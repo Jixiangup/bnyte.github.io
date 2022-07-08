@@ -8,6 +8,18 @@ tags: 连载
 
 <!-- more -->
 
+# Changelog
+
+## 20220708
+
+- [SublimeText3连接SFTP](#SublimeText3连接SFTP)
+
+## 20220708之前
+
+- [Windows微信多开](#微信多开)
+- [科学使用Jetbrains](#科学使用Jetbrains)
+
+
 # Windows
 
 ## 微信多开
@@ -29,6 +41,26 @@ start "" "D:\Tencent\WeChat\WeChat.exe" rem 需要多开的目标地址
 # Linux
 
 # 通用
+
+## SublimeText3连接SFTP
+
+- 下载安装Sublime text3
+
+- `Ctrl+\``打开控制台输入如下代码
+
+```
+import urllib.request,os,hashlib; h = '2915d1851351e5ee549c20394736b442' + '8bc59f460fa1548d1514676163dafc88'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)
+```
+
+- Preferences -> Browse Packages.....弹出目录后, 下载[插件](https://packagecontrol.io/Package Control.sublime-package)或访问浏览器下载`https://packagecontrol.io/Package Control.sublime-package`, 下载完成之后直接将其复制到刚刚打开的文件当中重启
+
+- `Ctrl+Shift+P`调出命令面板输入`install package`按回车等待弹出新的控制弹窗
+
+- 在弹出的控制弹窗中输入`SFTP`回车等待下载完成
+
+- 安装完成之后点击 `File -> SFTP/FTP -> MapToRemote 或者 Edit Server`
+
+- 自动生成一个sftp-config.json文件, 结合自己的情况配置就可以了
 
 ## 科学使用Jetbrains
 
@@ -92,3 +124,7 @@ start "" "D:\Tencent\WeChat\WeChat.exe" rem 需要多开的目标地址
 ![](https://blogimg.bytestroll.com/blog_img/idea/5.png)
 
 > 等待重启，成功，每次`重启`就会重新`刷新试用时间`了
+
+# Thanks
+
+- 感谢`CSDN`用户[ZFH__ZJ](https://blog.csdn.net/ZJ__ZFH)
