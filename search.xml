@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>系统使用</title>
+    <url>/2022/06/16/use-os/</url>
+    <content><![CDATA[<p>本文主要连载一些系统包括<code>Windows</code>,<code>Linux</code>,<code>Mac</code>等系统日常使用中遇到或写的一些小脚本或者说一些使用技巧等等~</p>
+<span id="more"></span>
+
+<h1 id="Changelog"><a href="#Changelog" class="headerlink" title="Changelog"></a>Changelog</h1><h2 id="20220708"><a href="#20220708" class="headerlink" title="20220708"></a>20220708</h2><ul>
+<li><a href="#SublimeText3%E8%BF%9E%E6%8E%A5SFTP">SublimeText3连接SFTP</a></li>
+</ul>
+<h2 id="20220708之前"><a href="#20220708之前" class="headerlink" title="20220708之前"></a>20220708之前</h2><ul>
+<li><p><a href="#%E5%BE%AE%E4%BF%A1%E5%A4%9A%E5%BC%80">Windows微信多开</a></p>
+</li>
+<li><p><a href="#%E7%A7%91%E5%AD%A6%E4%BD%BF%E7%94%A8Jetbrains">科学使用Jetbrains</a></p>
+</li>
+</ul>
+<h1 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h1><h2 id="微信多开"><a href="#微信多开" class="headerlink" title="微信多开"></a>微信多开</h2><ul>
+<li><p>创建<code>.bat</code>可执行脚本文件。</p>
+</li>
+<li><p>找到<code>wechat.exe</code>的目标地址</p>
+</li>
+<li><p>键入如下脚本</p>
+</li>
+</ul>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">TASKKILL /F /IM wechat.exe</span><br><span class="line"><span class="built_in">start</span> <span class="string">&quot;&quot;</span> <span class="string">&quot;D:\Tencent\WeChat\WeChat.exe&quot;</span> rem 需要多开的目标地址</span><br><span class="line"><span class="built_in">start</span> <span class="string">&quot;&quot;</span> <span class="string">&quot;D:\Tencent\WeChat\WeChat.exe&quot;</span> rem 需要多开的目标地址</span><br></pre></td></tr></table></figure>
+
+<h1 id="Mac"><a href="#Mac" class="headerlink" title="Mac"></a>Mac</h1><h1 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h1><h1 id="通用"><a href="#通用" class="headerlink" title="通用"></a>通用</h1><h2 id="SublimeText3连接SFTP"><a href="#SublimeText3连接SFTP" class="headerlink" title="SublimeText3连接SFTP"></a>SublimeText3连接SFTP</h2><ul>
+<li><p>下载安装Sublime text3</p>
+</li>
+<li><p>&#96;Ctrl+`&#96;打开控制台输入如下代码</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import urllib.request,os,hashlib; h = &#x27;2915d1851351e5ee549c20394736b442&#x27; + &#x27;8bc59f460fa1548d1514676163dafc88&#x27;; pf = &#x27;Package Control.sublime-package&#x27;; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( &#x27;http://packagecontrol.io/&#x27; + pf.replace(&#x27; &#x27;, &#x27;%20&#x27;)).read(); dh = hashlib.sha256(by).hexdigest(); print(&#x27;Error validating download (got %s instead of %s), please try manual install&#x27; % (dh, h)) if dh != h else open(os.path.join( ipp, pf), &#x27;wb&#x27; ).write(by)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>Preferences -&gt; Browse Packages…..弹出目录后, 下载<a href="https://packagecontrol.io/Package%20Control.sublime-package">插件</a>或访问浏览器下载<code>https://packagecontrol.io/Package Control.sublime-package</code>, 下载完成之后直接将其复制到刚刚打开的文件当中重启</p>
+</li>
+<li><p><code>Ctrl+Shift+P</code>调出命令面板输入<code>install package</code>按回车等待弹出新的控制弹窗</p>
+</li>
+<li><p>在弹出的控制弹窗中输入<code>SFTP</code>回车等待下载完成</p>
+</li>
+<li><p>安装完成之后点击 <code>File -&gt; SFTP/FTP -&gt; MapToRemote 或者 Edit Server</code></p>
+</li>
+<li><p>自动生成一个sftp-config.json文件, 结合自己的情况配置就可以了</p>
+</li>
+</ul>
+<h2 id="科学使用Jetbrains"><a href="#科学使用Jetbrains" class="headerlink" title="科学使用Jetbrains"></a>科学使用Jetbrains</h2><blockquote>
+<p>下面的功能没有特殊标注则表明支持<code>jetbrains</code>家族下面的所有系列产品均可通用~</p>
+</blockquote>
+<h3 id="使用Reset插件重置"><a href="#使用Reset插件重置" class="headerlink" title="使用Reset插件重置"></a>使用<code>Reset</code>插件重置</h3><blockquote>
+<p>仅支持2021.3以下 建议使用2021.2.x版本</p>
+</blockquote>
+<h3 id="下载idea"><a href="#下载idea" class="headerlink" title="下载idea"></a>下载idea</h3><blockquote>
+<p><a href="https://download.jetbrains.com/idea/ideaIU-2021.2.2.exe?_gl=1*1c4chbw*_ga*MTA0ODE1ODkwNS4xNjM1NTkwMzE3*_ga_V0XZL7QHEB*MTY0ODM4OTgxNC40LjEuMTY0ODM4OTgyMC4w&_ga=2.223952603.1391899983.1648389815-1048158905.1635590317">点击下载idea</a></p>
+</blockquote>
+<p>如果点击下载没有反应可以前往<a href="https://www.jetbrains.com/zh-cn/idea/download/other.html">官网</a>下载</p>
+<p><img src="https://blogimg.bytestroll.com/blog_img/idea/1.png"></p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><ul>
+<li>卸载老版本</li>
+</ul>
+<p><img src="https://img.chajianxw.com/chajian/164604171691955"></p>
+<p><img src="https://img.chajianxw.com/chajian/164604174406150"></p>
+<p>安装就是无脑安装下一步(<code>next</code>)就可以了..没什么好说的</p>
+<ul>
+<li>开始安装</li>
+</ul>
+<p><img src="https://img.chajianxw.com/chajian/164604330408118"></p>
+<p><img src="https://img.chajianxw.com/chajian/164604335389359"></p>
+<p><img src="https://img.chajianxw.com/chajian/164604339538384"></p>
+<p><img src="https://img.chajianxw.com/chajian/164604343562437"></p>
+<p><img src="https://img.chajianxw.com/chajian/164604347765732"></p>
+<blockquote>
+<p>如果没有试用三十天请自行降低版本</p>
+</blockquote>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><ul>
+<li><p>安装完成之后打开</p>
+</li>
+<li><p>打开插件</p>
+</li>
+</ul>
+<p><img src="https://blogimg.bytestroll.com/blog_img/idea/2.png"></p>
+<ul>
+<li>添加仓库插件仓库地址<code>plugins.zhile.io</code></li>
+</ul>
+<p><img src="https://blogimg.bytestroll.com/blog_img/idea/3.png"></p>
+<ul>
+<li>搜索插件<code>IDE Eval Reset</code></li>
+</ul>
+<p><img src="https://blogimg.bytestroll.com/blog_img/idea/4.png"></p>
+<ul>
+<li>开启<code>插件</code></li>
+</ul>
+<p><img src="https://blogimg.bytestroll.com/blog_img/idea/5.png"></p>
+<blockquote>
+<p>等待重启，成功，每次<code>重启</code>就会重新<code>刷新试用时间</code>了</p>
+</blockquote>
+<h1 id="Thanks"><a href="#Thanks" class="headerlink" title="Thanks"></a>Thanks</h1><ul>
+<li>感谢<code>CSDN</code>用户<a href="https://blog.csdn.net/ZJ__ZFH">ZFH__ZJ</a></li>
+</ul>
+]]></content>
+      <tags>
+        <tag>连载</tag>
+      </tags>
+  </entry>
+</search>
