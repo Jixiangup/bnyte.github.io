@@ -3,23 +3,23 @@
 - install
 
 ```
-yarn
+npm run install
 ```
 
 - build
 
 ```
-yarn build
+npm run build
 ```
 
 - clean
 
 ```
-yarn clean
+npm run clean
 ```
 
 - start
 
 ```
-yarn server | yarn start
+npm run server | npm run start
 ```
