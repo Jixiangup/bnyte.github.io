@@ -27,6 +27,8 @@
 </ul>
 <h1 id="语法总结"><a href="#语法总结" class="headerlink" title="语法总结"></a>语法总结</h1><ul>
 <li>不需要使用分号</li>
+<li>在go中的名称具有语义效果，名称在包外的可见性取决于它的第一个字符是否大些。</li>
+<li>导入包时，包名称成为内容的访问器如：<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">  fmt.Println(<span class="string">&quot;包名访问方式&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ul>
 <h1 id="踩坑"><a href="#踩坑" class="headerlink" title="踩坑"></a>踩坑</h1><ul>
 <li><p>在<code>Go</code>里面必须要配置的是<code>GOROOT</code>和<code>GOPATH</code></p>
