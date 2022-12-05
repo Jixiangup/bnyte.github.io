@@ -53,6 +53,27 @@ tags: [学习, 连载]
     fmt.Println("Hello World")
   }
   ```
+
+## 语法介绍
+
+### 创建函数
+
+- 语法
+
+  主意：当返回值为`void`时直接缺省。
+
+  > func {FUNC_NAME}({NAME} {TYPE}, .... {NAME} {TYPE}) {RESULT_TYPE} { code block... }
+
+  ```go
+  func sum(pre int, next int) int {
+    return pre + next;
+  }
+  ```
+
+- 总结
+
+  当函数、属性名的首字母大写时，则该实例会被导出(如Java中的`public`)
+
 # 语法总结
 
 - 不需要使用分号
@@ -65,6 +86,15 @@ tags: [学习, 连载]
     fmt.Println("包名访问方式");
   }
   ```
+- 导入包时同时可以指定别名:
+  ```go
+  import "f fmt"
+
+  func main() {
+    f.Println("包名访问方式");
+  }
+  ```
+- 在Go中是不允许忽略`{}`(大括号)的，即使代码块中只有一行。
 
 # 踩坑
 
