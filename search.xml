@@ -25,10 +25,24 @@
 <li><p>编写<code>main</code>函数</p>
 <figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 没个项目都必须要有一个，并且如果期望运行必须引入且方法中必须包含`main`函数</span></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">  fmt.Println(<span class="string">&quot;Hello World&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ul>
+<h2 id="语法介绍"><a href="#语法介绍" class="headerlink" title="语法介绍"></a>语法介绍</h2><h3 id="创建函数"><a href="#创建函数" class="headerlink" title="创建函数"></a>创建函数</h3><ul>
+<li><p>语法</p>
+<p>主意：当返回值为<code>void</code>时直接缺省。</p>
+<blockquote>
+<p>func {FUNC_NAME}({NAME} {TYPE}, …. {NAME} {TYPE}) {RESULT_TYPE} { code block… }</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">sum</span><span class="params">(pre <span class="type">int</span>, next <span class="type">int</span>)</span></span> <span class="type">int</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> pre + next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>总结</p>
+<p>当函数、属性名的首字母大写时，则该实例会被导出(如Java中的<code>public</code>)</p>
+</li>
+</ul>
 <h1 id="语法总结"><a href="#语法总结" class="headerlink" title="语法总结"></a>语法总结</h1><ul>
 <li>不需要使用分号</li>
 <li>在go中的名称具有语义效果，名称在包外的可见性取决于它的第一个字符是否大些。</li>
 <li>导入包时，包名称成为内容的访问器如：<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">  fmt.Println(<span class="string">&quot;包名访问方式&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>导入包时同时可以指定别名:<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&quot;f fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">  f.Println(<span class="string">&quot;包名访问方式&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>在Go中是不允许忽略<code>&#123;&#125;</code>(大括号)的，即使代码块中只有一行。</li>
 </ul>
 <h1 id="踩坑"><a href="#踩坑" class="headerlink" title="踩坑"></a>踩坑</h1><ul>
 <li><p>在<code>Go</code>里面必须要配置的是<code>GOROOT</code>和<code>GOPATH</code></p>
