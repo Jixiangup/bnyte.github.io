@@ -1,6 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Golang-keep_it_up</title>
+    <url>/2022/12/05/Golang-keep-it-up/</url>
+    <content><![CDATA[<p>本文主要连载自己的<code>Golang</code>学习笔记以及自己遇到的一些坑或者说自己的感悟吧, 这是一个漫长的过程, 如同标题一样 <code>keep it up gogogo....</code></p>
+<span id="more"></span>
+
+<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><blockquote>
+<p>其实本来不打算写这个引言 既然是blog 还是写写吧 并不是笔记项目哈哈哈，学这个就是最近学完了<code>python</code>然后想再继续学点吧, 毕竟都说它是<code>Google</code>开源的未来趋势，毕竟<code>k8s</code>, <code>docker</code>等前沿或者应用较为广泛的技术都被应用上了, 而我还在守着<code>Java</code>的一亩三分地自顾自的说着<code>Java No.1</code>倒是有些顽固不化了，说那么多，就不说了 开始吧！！！！</p>
+</blockquote>
+<blockquote>
+<p>本文主要素材内容来源于网络,主要采取<a href="https://go.dev/">Golang官方文档</a>, 如果引用了其他帮助请见下文的<a href="#%E9%B8%A3%E8%B0%A2">鸣谢</a>，如果我标记错了出处或者对您的版权产生了侵犯，请您谅解我并非有意，这并非一个<code>商用博客</code>，同时您如果对此有任何不满请与<a href="/about">我</a>取得联系, 我将以最快的时间之内对您进行处理，因为我需要工作所以希望您能够耐心的等待。</p>
+</blockquote>
+<h1 id="Golang"><a href="#Golang" class="headerlink" title="Golang"></a>Golang</h1><h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><h3 id="选择IDE"><a href="#选择IDE" class="headerlink" title="选择IDE"></a>选择IDE</h3><p>  我是使用的<a href="https://www.jetbrains.com/">JetBrains</a>公司产出的<code>GoLand</code>进行开发，如果你期望使用<a href="https://code.visualstudio.com/">VsCode</a>你可以自行获取解决、集成方案。</p>
+<h3 id="安装Golang"><a href="#安装Golang" class="headerlink" title="安装Golang"></a>安装Golang</h3><p>  在<a href="https://go.dev/dl/">Golang官方下载</a>页下载适合自己系统适用的环境版本, 并且打开直接下一步安装即可。</p>
+<p>配置环境变量以及简单创建文件的配置就忽略了…</p>
+<h3 id="HelloWorld"><a href="#HelloWorld" class="headerlink" title="HelloWorld"></a>HelloWorld</h3><p>创建空文件夹使用<code>goland</code>打开，或者直接在<code>goland</code>中创建工程.</p>
+<ul>
+<li><p>在项目根目录创建文件<code>go.mod</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 模块名可以直接与工程名相同</span><br><span class="line">module helloworld</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建main.go文件</p>
+</li>
+<li><p>编写<code>main</code>函数</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 没个项目都必须要有一个，并且如果期望运行必须引入且方法中必须包含`main`函数</span></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">  fmt.Println(<span class="string">&quot;Hello World&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="语法总结"><a href="#语法总结" class="headerlink" title="语法总结"></a>语法总结</h1><ul>
+<li>不需要使用分号</li>
+</ul>
+<h1 id="踩坑"><a href="#踩坑" class="headerlink" title="踩坑"></a>踩坑</h1><ul>
+<li><p>在<code>Go</code>里面必须要配置的是<code>GOROOT</code>和<code>GOPATH</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">GOROOT: go安装的根路径</span><br><span class="line">GOPATH: 暂时不知道作用是什么到时候补上</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="鸣谢"><a href="#鸣谢" class="headerlink" title="鸣谢"></a>鸣谢</h1><ul>
+<li><a href="https://go.dev/">Golang</a></li>
+<li><a href="https://www.jetbrains.com/">JetBrains</a></li>
+</ul>
+]]></content>
+      <tags>
+        <tag>学习</tag>
+        <tag>连载</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>系统使用</title>
     <url>/2022/06/16/use-os/</url>
     <content><![CDATA[<p>本文主要连载一些系统包括<code>Windows</code>,<code>Linux</code>,<code>Mac</code>等系统日常使用中遇到或写的一些小脚本或者说一些使用技巧等等~</p>
