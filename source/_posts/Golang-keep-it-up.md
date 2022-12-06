@@ -70,9 +70,119 @@ tags: [学习, 连载]
   }
   ```
 
+### 创建变量
+
+- 指定变量类型，如果没有初始化，则变量默认为零值
+
+  > var {field_name} {field_type}
+  > 
+  > {field_name} = {field_value}
+
+  ```go
+  package main
+  import "fmt"
+
+  func main() {
+    var name = "猪猪侠"
+    fmt.Println("用户名是:", name) // 猪猪侠
+
+    var b int
+    fmt.Println("没有初始化值的b:", b) // 0
+
+    var c bool
+    fmt.Println("没有初始化值的c", false) // boolean类型默认为false
+  }
+  ```
+- 隐式生命语法糖
+
+  主意：无法使用在已经使用`var`声明过的属性上
+
+  > {field_name} := {field_value}
+
+  ```go
+  // 等价 var number int = 1
+  number := 1
+  ```
+
+- 多变量声明
+
+  > 类型相同的多个变量，非全局变量
+
+  ```go
+  // 等价于 name00, name01 := 1, 2
+  var name00, name01 int = 1, 2
+
+  // 这种因式分解关键字的写法一般用于声明全局变量
+  const (
+      vname1 v_type1
+      vname2 v_type2
+  )
+  ```
+
+
+<!-- arr1 := [...]int{1, 2, 3} -->
+
 - 总结
 
   当函数、属性名的首字母大写时，则该实例会被导出(如Java中的`public`)
+
+## 本地多模块
+
+- 创建模块
+
+```
+go mod init bnyte.com/hello
+```
+
+- 指定查找依赖项
+
+> 模块名 = 模块给予当前路径的路径
+
+```
+ go mod edit -replace bnyte.com/greetings=../greetings
+```
+
+- 指定模块使用本地模块以及版本
+
+```
+go mod tidy
+```
+
+## 异常
+
+- 抛出异常
+
+  ```go
+  package main
+
+  import "errors"
+
+  func main() {
+    errors.New("empty name")
+  }
+  ```
+
+- 打印异常并中断程序执行
+
+  ```go
+  package main
+
+  import (
+    "errors"
+    "log"
+  )
+
+  func main() {
+    err := errors.New("empty name")
+
+    // 设置预定义Logger的属性，包括
+    // 日志条目前缀和禁用打印的标志
+    //  时间、源文件和行号.
+    log.SetPrefix("greetings: ")
+	  log.SetFlags(10)
+    log.Fatal(err)
+  }
+  ```
 
 # 语法总结
 
@@ -95,6 +205,12 @@ tags: [学习, 连载]
   }
   ```
 - 在Go中是不允许忽略`{}`(大括号)的，即使代码块中只有一行。
+
+# Go总结
+
+- 在 Go 中`string`同样属于基本数据类型，使用这些类型的变量直接指向存在内存中的值, 通过`&{field_name}`来获取到对象内存地址，与此同时值类型变量的值`存储在堆`中。
+
+- 在 Go 通过`*{field_name}`来获取到内存所对应的值。
 
 # 踩坑
 
