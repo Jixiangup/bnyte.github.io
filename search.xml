@@ -31,11 +31,59 @@
 <blockquote>
 <p>func {FUNC_NAME}({NAME} {TYPE}, …. {NAME} {TYPE}) {RESULT_TYPE} { code block… }</p>
 </blockquote>
-<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">sum</span><span class="params">(pre <span class="type">int</span>, next <span class="type">int</span>)</span></span> <span class="type">int</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> pre + next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">sum</span><span class="params">(pre <span class="type">int</span>, next <span class="type">int</span>)</span></span> <span class="type">int</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> pre + next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="创建变量"><a href="#创建变量" class="headerlink" title="创建变量"></a>创建变量</h3><ul>
+<li><p>指定变量类型，如果没有初始化，则变量默认为零值</p>
+<blockquote>
+<p>var {field_name} {field_type}</p>
+<p>{field_name} &#x3D; {field_value}</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">  <span class="keyword">var</span> name = <span class="string">&quot;猪猪侠&quot;</span></span><br><span class="line">  fmt.Println(<span class="string">&quot;用户名是:&quot;</span>, name) <span class="comment">// 猪猪侠</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> b <span class="type">int</span></span><br><span class="line">  fmt.Println(<span class="string">&quot;没有初始化值的b:&quot;</span>, b) <span class="comment">// 0</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> c <span class="type">bool</span></span><br><span class="line">  fmt.Println(<span class="string">&quot;没有初始化值的c&quot;</span>, <span class="literal">false</span>) <span class="comment">// boolean类型默认为false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>隐式生命语法糖</p>
+<p>主意：无法使用在已经使用<code>var</code>声明过的属性上</p>
+<blockquote>
+<p>{field_name} :&#x3D; {field_value}</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 等价 var number int = 1</span></span><br><span class="line">number := <span class="number">1</span></span><br></pre></td></tr></table></figure>
 </li>
+<li><p>多变量声明</p>
+<blockquote>
+<p>类型相同的多个变量，非全局变量</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 等价于 name00, name01 := 1, 2</span></span><br><span class="line"><span class="keyword">var</span> name00, name01 <span class="type">int</span> = <span class="number">1</span>, <span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 这种因式分解关键字的写法一般用于声明全局变量</span></span><br><span class="line"><span class="keyword">const</span> (</span><br><span class="line">    vname1 v_type1</span><br><span class="line">    vname2 v_type2</span><br><span class="line">)</span><br></pre></td></tr></table></figure></li>
+</ul>
+<!-- arr1 := [...]int{1, 2, 3} -->
+
+<ul>
 <li><p>总结</p>
 <p>当函数、属性名的首字母大写时，则该实例会被导出(如Java中的<code>public</code>)</p>
 </li>
+</ul>
+<h2 id="本地多模块"><a href="#本地多模块" class="headerlink" title="本地多模块"></a>本地多模块</h2><ul>
+<li>创建模块</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">go mod init bnyte.com/hello</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>指定查找依赖项</li>
+</ul>
+<blockquote>
+<p>模块名 &#x3D; 模块给予当前路径的路径</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">go mod edit -replace bnyte.com/greetings=../greetings</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>指定模块使用本地模块以及版本</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">go mod tidy</span><br></pre></td></tr></table></figure>
+
+<h2 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h2><ul>
+<li><p>抛出异常</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;errors&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">  errors.New(<span class="string">&quot;empty name&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>打印异常并中断程序执行</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">  <span class="string">&quot;errors&quot;</span></span><br><span class="line">  <span class="string">&quot;log&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">  err := errors.New(<span class="string">&quot;empty name&quot;</span>)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 设置预定义Logger的属性，包括</span></span><br><span class="line">  <span class="comment">// 日志条目前缀和禁用打印的标志</span></span><br><span class="line">  <span class="comment">//  时间、源文件和行号.</span></span><br><span class="line">  log.SetPrefix(<span class="string">&quot;greetings: &quot;</span>)</span><br><span class="line"> log.SetFlags(<span class="number">10</span>)</span><br><span class="line">  log.Fatal(err)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ul>
 <h1 id="语法总结"><a href="#语法总结" class="headerlink" title="语法总结"></a>语法总结</h1><ul>
 <li>不需要使用分号</li>
@@ -43,6 +91,12 @@
 <li>导入包时，包名称成为内容的访问器如：<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">  fmt.Println(<span class="string">&quot;包名访问方式&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 <li>导入包时同时可以指定别名:<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&quot;f fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">  f.Println(<span class="string">&quot;包名访问方式&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 <li>在Go中是不允许忽略<code>&#123;&#125;</code>(大括号)的，即使代码块中只有一行。</li>
+</ul>
+<h1 id="Go总结"><a href="#Go总结" class="headerlink" title="Go总结"></a>Go总结</h1><ul>
+<li><p>在 Go 中<code>string</code>同样属于基本数据类型，使用这些类型的变量直接指向存在内存中的值, 通过<code>&amp;&#123;field_name&#125;</code>来获取到对象内存地址，与此同时值类型变量的值<code>存储在堆</code>中。</p>
+</li>
+<li><p>在 Go 通过<code>*&#123;field_name&#125;</code>来获取到内存所对应的值。</p>
+</li>
 </ul>
 <h1 id="踩坑"><a href="#踩坑" class="headerlink" title="踩坑"></a>踩坑</h1><ul>
 <li><p>在<code>Go</code>里面必须要配置的是<code>GOROOT</code>和<code>GOPATH</code></p>

@@ -28,7 +28,7 @@
 <meta property="og:description" content="本文主要连载自己的Golang学习笔记以及自己遇到的一些坑或者说自己的感悟吧, 这是一个漫长的过程, 如同标题一样 keep it up gogogo....">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-12-05T12:29:35.000Z">
-<meta property="article:modified_time" content="2022-12-05T06:25:48.960Z">
+<meta property="article:modified_time" content="2022-12-06T07:26:33.020Z">
 <meta property="article:author" content="bnyte">
 <meta property="article:tag" content="学习">
 <meta property="article:tag" content="连载">
@@ -145,7 +145,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%95%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Golang"><span class="nav-number">2.</span> <span class="nav-text">Golang</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87"><span class="nav-number">2.1.</span> <span class="nav-text">环境准备</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%89%E6%8B%A9IDE"><span class="nav-number">2.1.1.</span> <span class="nav-text">选择IDE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85Golang"><span class="nav-number">2.1.2.</span> <span class="nav-text">安装Golang</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HelloWorld"><span class="nav-number">2.1.3.</span> <span class="nav-text">HelloWorld</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95%E4%BB%8B%E7%BB%8D"><span class="nav-number">2.2.</span> <span class="nav-text">语法介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%87%BD%E6%95%B0"><span class="nav-number">2.2.1.</span> <span class="nav-text">创建函数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95%E6%80%BB%E7%BB%93"><span class="nav-number">3.</span> <span class="nav-text">语法总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B8%A9%E5%9D%91"><span class="nav-number">4.</span> <span class="nav-text">踩坑</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%B8%A3%E8%B0%A2"><span class="nav-number">5.</span> <span class="nav-text">鸣谢</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%95%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Golang"><span class="nav-number">2.</span> <span class="nav-text">Golang</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87"><span class="nav-number">2.1.</span> <span class="nav-text">环境准备</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%89%E6%8B%A9IDE"><span class="nav-number">2.1.1.</span> <span class="nav-text">选择IDE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85Golang"><span class="nav-number">2.1.2.</span> <span class="nav-text">安装Golang</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HelloWorld"><span class="nav-number">2.1.3.</span> <span class="nav-text">HelloWorld</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95%E4%BB%8B%E7%BB%8D"><span class="nav-number">2.2.</span> <span class="nav-text">语法介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%87%BD%E6%95%B0"><span class="nav-number">2.2.1.</span> <span class="nav-text">创建函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%8F%98%E9%87%8F"><span class="nav-number">2.2.2.</span> <span class="nav-text">创建变量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E5%A4%9A%E6%A8%A1%E5%9D%97"><span class="nav-number">2.3.</span> <span class="nav-text">本地多模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%82%E5%B8%B8"><span class="nav-number">2.4.</span> <span class="nav-text">异常</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95%E6%80%BB%E7%BB%93"><span class="nav-number">3.</span> <span class="nav-text">语法总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Go%E6%80%BB%E7%BB%93"><span class="nav-number">4.</span> <span class="nav-text">Go总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B8%A9%E5%9D%91"><span class="nav-number">5.</span> <span class="nav-text">踩坑</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%B8%A3%E8%B0%A2"><span class="nav-number">6.</span> <span class="nav-text">鸣谢</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -260,9 +260,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2022-12-05 12:29:35 / 修改时间：06:25:48" itemprop="dateCreated datePublished" datetime="2022-12-05T12:29:35+00:00">2022-12-05</time>
+      <time title="创建时间：2022-12-05 12:29:35" itemprop="dateCreated datePublished" datetime="2022-12-05T12:29:35+00:00">2022-12-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-12-06 07:26:33" itemprop="dateModified" datetime="2022-12-06T07:26:33+00:00">2022-12-06</time>
     </span>
 
   
@@ -272,14 +278,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>761</span>
+      <span>1.2k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>3 分钟</span>
+      <span>4 分钟</span>
     </span>
 </div>
 
@@ -318,11 +324,59 @@
 <blockquote>
 <p>func {FUNC_NAME}({NAME} {TYPE}, …. {NAME} {TYPE}) {RESULT_TYPE} { code block… }</p>
 </blockquote>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">sum</span><span class="params">(pre <span class="type">int</span>, next <span class="type">int</span>)</span></span> <span class="type">int</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> pre + next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">sum</span><span class="params">(pre <span class="type">int</span>, next <span class="type">int</span>)</span></span> <span class="type">int</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> pre + next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="创建变量"><a href="#创建变量" class="headerlink" title="创建变量"></a>创建变量</h3><ul>
+<li><p>指定变量类型，如果没有初始化，则变量默认为零值</p>
+<blockquote>
+<p>var {field_name} {field_type}</p>
+<p>{field_name} &#x3D; {field_value}</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">  <span class="keyword">var</span> name = <span class="string">&quot;猪猪侠&quot;</span></span><br><span class="line">  fmt.Println(<span class="string">&quot;用户名是:&quot;</span>, name) <span class="comment">// 猪猪侠</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> b <span class="type">int</span></span><br><span class="line">  fmt.Println(<span class="string">&quot;没有初始化值的b:&quot;</span>, b) <span class="comment">// 0</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> c <span class="type">bool</span></span><br><span class="line">  fmt.Println(<span class="string">&quot;没有初始化值的c&quot;</span>, <span class="literal">false</span>) <span class="comment">// boolean类型默认为false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>隐式生命语法糖</p>
+<p>主意：无法使用在已经使用<code>var</code>声明过的属性上</p>
+<blockquote>
+<p>{field_name} :&#x3D; {field_value}</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 等价 var number int = 1</span></span><br><span class="line">number := <span class="number">1</span></span><br></pre></td></tr></table></figure>
 </li>
+<li><p>多变量声明</p>
+<blockquote>
+<p>类型相同的多个变量，非全局变量</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 等价于 name00, name01 := 1, 2</span></span><br><span class="line"><span class="keyword">var</span> name00, name01 <span class="type">int</span> = <span class="number">1</span>, <span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 这种因式分解关键字的写法一般用于声明全局变量</span></span><br><span class="line"><span class="keyword">const</span> (</span><br><span class="line">    vname1 v_type1</span><br><span class="line">    vname2 v_type2</span><br><span class="line">)</span><br></pre></td></tr></table></figure></li>
+</ul>
+<!-- arr1 := [...]int{1, 2, 3} -->
+
+<ul>
 <li><p>总结</p>
 <p>当函数、属性名的首字母大写时，则该实例会被导出(如Java中的<code>public</code>)</p>
 </li>
+</ul>
+<h2 id="本地多模块"><a href="#本地多模块" class="headerlink" title="本地多模块"></a>本地多模块</h2><ul>
+<li>创建模块</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go mod init bnyte.com/hello</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>指定查找依赖项</li>
+</ul>
+<blockquote>
+<p>模块名 &#x3D; 模块给予当前路径的路径</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go mod edit -replace bnyte.com/greetings=../greetings</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>指定模块使用本地模块以及版本</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go mod tidy</span><br></pre></td></tr></table></figure>
+
+<h2 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h2><ul>
+<li><p>抛出异常</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;errors&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">  errors.New(<span class="string">&quot;empty name&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>打印异常并中断程序执行</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">  <span class="string">&quot;errors&quot;</span></span><br><span class="line">  <span class="string">&quot;log&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">  err := errors.New(<span class="string">&quot;empty name&quot;</span>)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 设置预定义Logger的属性，包括</span></span><br><span class="line">  <span class="comment">// 日志条目前缀和禁用打印的标志</span></span><br><span class="line">  <span class="comment">//  时间、源文件和行号.</span></span><br><span class="line">  log.SetPrefix(<span class="string">&quot;greetings: &quot;</span>)</span><br><span class="line"> log.SetFlags(<span class="number">10</span>)</span><br><span class="line">  log.Fatal(err)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ul>
 <h1 id="语法总结"><a href="#语法总结" class="headerlink" title="语法总结"></a>语法总结</h1><ul>
 <li>不需要使用分号</li>
@@ -330,6 +384,12 @@
 <li>导入包时，包名称成为内容的访问器如：<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">  fmt.Println(<span class="string">&quot;包名访问方式&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 <li>导入包时同时可以指定别名:<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&quot;f fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">  f.Println(<span class="string">&quot;包名访问方式&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 <li>在Go中是不允许忽略<code>&#123;&#125;</code>(大括号)的，即使代码块中只有一行。</li>
+</ul>
+<h1 id="Go总结"><a href="#Go总结" class="headerlink" title="Go总结"></a>Go总结</h1><ul>
+<li><p>在 Go 中<code>string</code>同样属于基本数据类型，使用这些类型的变量直接指向存在内存中的值, 通过<code>&amp;&#123;field_name&#125;</code>来获取到对象内存地址，与此同时值类型变量的值<code>存储在堆</code>中。</p>
+</li>
+<li><p>在 Go 通过<code>*&#123;field_name&#125;</code>来获取到内存所对应的值。</p>
+</li>
 </ul>
 <h1 id="踩坑"><a href="#踩坑" class="headerlink" title="踩坑"></a>踩坑</h1><ul>
 <li><p>在<code>Go</code>里面必须要配置的是<code>GOROOT</code>和<code>GOPATH</code></p>
@@ -430,14 +490,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">1k</span>
+    <span title="站点总字数">2k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">5 分钟</span>
+    <span title="站点阅读时长">6 分钟</span>
   </span>
 </div>
 
