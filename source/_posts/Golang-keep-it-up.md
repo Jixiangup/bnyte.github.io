@@ -10,21 +10,21 @@ tags: [学习, 连载]
 
 # 引言
 
-> 其实本来不打算写这个引言 既然是blog 还是写写吧 并不是笔记项目哈哈哈，学这个就是最近学完了`python`然后想再继续学点吧, 毕竟都说它是`Google`开源的未来趋势，毕竟`k8s`, `docker`等前沿或者应用较为广泛的技术都被应用上了, 而我还在守着`Java`的一亩三分地自顾自的说着`Java No.1`倒是有些顽固不化了，说那么多，就不说了 开始吧！！！！
+> 其实本来不打算写这个引言 既然是 blog 还是写写吧 并不是笔记项目哈哈哈，学这个就是最近学完了`python`然后想再继续学点吧, 毕竟都说它是`Google`开源的未来趋势，毕竟`k8s`, `docker`等前沿或者应用较为广泛的技术都被应用上了, 而我还在守着`Java`的一亩三分地自顾自的说着`Java No.1`倒是有些顽固不化了，说那么多，就不说了 开始吧！！！！
 
-> 本文主要素材内容来源于网络,主要采取[Golang官方文档](https://go.dev), 如果引用了其他帮助请见下文的[鸣谢](#鸣谢)，如果我标记错了出处或者对您的版权产生了侵犯，请您谅解我并非有意，这并非一个`商用博客`，同时您如果对此有任何不满请与[我](/about)取得联系, 我将以最快的时间之内对您进行处理，因为我需要工作所以希望您能够耐心的等待。
+> 本文主要素材内容来源于网络,主要采取[Golang 官方文档](https://go.dev), 如果引用了其他帮助请见下文的[鸣谢](#鸣谢)，如果我标记错了出处或者对您的版权产生了侵犯，请您谅解我并非有意，这并非一个`商用博客`，同时您如果对此有任何不满请与[我](/about)取得联系, 我将以最快的时间之内对您进行处理，因为我需要工作所以希望您能够耐心的等待。
 
 # Golang
 
 ## 环境准备
 
-### 选择IDE
+### 选择 IDE
 
-  我是使用的[JetBrains](https://www.jetbrains.com/)公司产出的`GoLand`进行开发，如果你期望使用[VsCode](https://code.visualstudio.com/)你可以自行获取解决、集成方案。
+我是使用的[JetBrains](https://www.jetbrains.com/)公司产出的`GoLand`进行开发，如果你期望使用[VsCode](https://code.visualstudio.com/)你可以自行获取解决、集成方案。
 
-### 安装Golang
+### 安装 Golang
 
-  在[Golang官方下载](https://go.dev/dl/)页下载适合自己系统适用的环境版本, 并且打开直接下一步安装即可。
+在[Golang 官方下载](https://go.dev/dl/)页下载适合自己系统适用的环境版本, 并且打开直接下一步安装即可。
 
 配置环境变量以及简单创建文件的配置就忽略了...
 
@@ -33,13 +33,13 @@ tags: [学习, 连载]
 创建空文件夹使用`goland`打开，或者直接在`goland`中创建工程.
 
 - 在项目根目录创建文件`go.mod`
-  
+
   ```
   // 模块名可以直接与工程名相同
   module helloworld
   ```
 
-- 创建main.go文件
+- 创建 main.go 文件
 
 - 编写`main`函数
 
@@ -75,7 +75,7 @@ tags: [学习, 连载]
 - 指定变量类型，如果没有初始化，则变量默认为零值
 
   > var {field_name} {field_type}
-  > 
+  >
   > {field_name} = {field_value}
 
   ```go
@@ -93,6 +93,7 @@ tags: [学习, 连载]
     fmt.Println("没有初始化值的c", false) // boolean类型默认为false
   }
   ```
+
 - 隐式生命语法糖
 
   主意：无法使用在已经使用`var`声明过的属性上
@@ -119,12 +120,11 @@ tags: [学习, 连载]
   )
   ```
 
-
 <!-- arr1 := [...]int{1, 2, 3} -->
 
 - 总结
 
-  当函数、属性名的首字母大写时，则该实例会被导出(如Java中的`public`)
+  当函数、属性名的首字母大写时，则该实例会被导出(如 Java 中的`public`)
 
 ## 本地多模块
 
@@ -179,16 +179,40 @@ go mod tidy
     // 日志条目前缀和禁用打印的标志
     //  时间、源文件和行号.
     log.SetPrefix("greetings: ")
-	  log.SetFlags(10)
+    log.SetFlags(10)
     log.Fatal(err)
   }
   ```
 
+## 反射
+
+### 操作 struct
+
+```go
+type Account struct {
+	Id   string `json:"id"`
+	Name string `json:"name"`
+}
+
+func main() {
+	// testMethod()
+
+	account := Account{}
+	typeOf := reflect.TypeOf(account)
+	//align := typeOf.Align()
+	for i := 0; i < typeOf.NumField(); i++ {
+		fmt.Printf("field' name is %s, type is %s, tag is %s\n", typeOf.Field(i).Name, typeOf.Field(i).Type, typeOf.Field(i).Tag.Get("json"))
+	}
+
+}
+```
+
 # 语法总结
 
 - 不需要使用分号
-- 在go中的名称具有语义效果，名称在包外的可见性取决于它的第一个字符是否大些。
+- 在 go 中的名称具有语义效果，名称在包外的可见性取决于它的第一个字符是否大些。
 - 导入包时，包名称成为内容的访问器如：
+
   ```go
   import "fmt"
 
@@ -196,7 +220,9 @@ go mod tidy
     fmt.Println("包名访问方式");
   }
   ```
+
 - 导入包时同时可以指定别名:
+
   ```go
   import "f fmt"
 
@@ -204,9 +230,10 @@ go mod tidy
     f.Println("包名访问方式");
   }
   ```
-- 在Go中是不允许忽略`{}`(大括号)的，即使代码块中只有一行。
 
-# Go总结
+- 在 Go 中是不允许忽略`{}`(大括号)的，即使代码块中只有一行。
+
+# Go 总结
 
 - 在 Go 中`string`同样属于基本数据类型，使用这些类型的变量直接指向存在内存中的值, 通过`&{field_name}`来获取到对象内存地址，与此同时值类型变量的值`存储在堆`中。
 
