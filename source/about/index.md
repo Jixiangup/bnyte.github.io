@@ -9,9 +9,9 @@ layout: "about"
 
 ### 个人信息
 
-|  姓名  |       电话        |       邮箱        | 工作经验 | 应聘岗位  |
-| :----: | :---------------: | :---------------: | :------: | :-------: |
-| 刘吉祥 | +86 155-5551-5953 | bnytezz@gmail.com |  3.5 年  | Java 开发 |
+|  姓名  |       电话        |       邮箱        |          GitHub          |            在线简历            | 工作经验 | 应聘岗位  |
+| :----: | :---------------: | :---------------: | :----------------------: | :----------------------------: | :------: | --------- |
+| 刘吉祥 | +86 155-5551-5953 | bnytezz@gmail.com | https://github.com/bnyte | https://bnyte.github.io/about/ |  3.5 年  | Java 开发 |
 
 ### 开源经历
 
@@ -103,7 +103,7 @@ layout: "about"
 
 ### 工作经历
 
-#### 深圳华数云计算技术有限公司
+#### 深圳九章数据科技有限公司
 
 2022.02 - 至今
 
@@ -143,21 +143,20 @@ layout: "about"
 
 - 项目名称
   IDAS-大数据平台分布式任务调度系统
-- 项目地址
 - 开发环境
   IDEA2021，MySQL5.7，maven，git，Gitlab，jdk1.8，MacOS，flink1.2，cdh3.1.3, SpringBoot2.5.0 ...
 - 项目进度
   华润万家深圳总部、中石化、广州丽日等多家厂商已投入生产并使用
 
-#### 项目架构
+##### 项目架构
 
 SpringBoot、MyBatisPlus、Nginx、SpringCloud(Nacos)、Redis、Docker、Jenkins、K8S、cdh、 flink、spark、sparkthrift、hive、doris、starrocks 等
 
-#### 项目描述
+##### 项目描述
 
 为企业提供云原生、微服务架构的数字化基座，打造国内领先的零售数据应用操作系统。为企业提供全链路 “产品+技术+方法论”服务，助力企业快速搭建安全、易用的数据中台，最大化沉淀数据资产、释放数据价值，驱动创新型业务增长。
 
-#### 责任描述
+##### 责任描述
 
 - 完成 IDAS 项目 3.x 版本迭代
 - 根据不同需求完成并且实现
@@ -166,7 +165,7 @@ SpringBoot、MyBatisPlus、Nginx、SpringCloud(Nacos)、Redis、Docker、Jenkins
 - 配合前端完成日常任务
 - 完成接口文档编写以及技术文档编写
 
-#### 技术描述
+##### 技术描述
 
 - 使用 SpringBoot + SpringCloud(nacos)作为项目主体架构。
 - 使用 docker + Jenkins + k8s 完成自动化部署
@@ -174,3 +173,111 @@ SpringBoot、MyBatisPlus、Nginx、SpringCloud(Nacos)、Redis、Docker、Jenkins
 - 使用 nginx 对 gateway 服务做域名分配对后端服务统一管理上线测试 使用 git + gitlab 做版本控制
 - 使用 flink 作为实时同步计算引擎
 - 使用 HIve 以及 starrocks(doris)作为离线计算引擎 使用海豚调度器作为调度转发
+
+#### ICDP-自动化标签系统
+
+- 项目名称
+  ICDP-自动化标签系统
+- 开发环境
+  IDEA2021，MySQL5.7，maven，git，Gitlab，jdk1.8，MacOS，flink1.2，cdh3.1.3, SpringBoot2.5.0 ...
+- 项目进度
+  1.0.0 内侧
+
+##### 项目架构
+
+SpringBoot、MyBatisPlus、Nginx、SpringCloud(Nacos)、Redis、Docker、Jenkins、K8S 等
+
+##### 项目描述
+
+丰富 one ID 合并策略、强大的人群圈选能力、最优的营销策略输出，快速洞察客群定位及消费特征习惯，搭建业务新增长模型。多源统一高质量 oneID 模型策略、灵活高效用户分群圈选能力、动态最优营销策略制定、营销数据复盘分析。
+
+##### 责任描述
+
+- 完成 ICDP 项目 1.x 项目设计和开发
+- 根据不同需求完成并且实现
+- 解决项目中遇到的困难与难题并给出相关解决方案
+- 主导项目技术栈的大概方向和技术选型大概方向
+- 配合前端完成日常任务
+- 完成接口文档编写以及技术文档编写
+
+##### 技术描述
+
+- 使用 SpringBoot + SpringCloud(nacos)作为项目主体架构。
+- 使用 docker + Jenkins + k8s 完成自动化部署
+- 使用 mybatis、mybatis-plus 对 MySQL 数据库管理和高效开发 使用 redis 作为缓存数据库
+- 使用 nginx 对 gateway 服务做域名分配对后端服务统一管理上线测试 使用 git + gitlab 做版本控制
+- 使用 Kafka 做系统事件管理
+
+#### 超有惠-积分购物商城
+
+- 项目名称
+  超有惠-积分购物商城
+- 开发环境
+  IDEA2021，MySQL8.0，maven，git，Gitee，jdk1.8，Mac OS ...
+- 项目进度
+  项目以上线，官网: http://www.chyouhui.com
+
+##### 项目架构
+
+SpringBoot、MyBatisPlus、Nginx、SpringCloud(Nacos)、Redis、RabbitMQ、Docker、Jenkins、 SpringGateway 等
+
+##### 项目描述
+
+超有惠是一款积分购物应用，用户通过使用超有惠 APP 可以获得积分奖励，在超有惠商城购物可以使用 积分购买商品，享受真正的实惠，不花一分冤枉钱。目前采用的是 积分+RMB 方式购物，积分可通过一些 相关营销活动获得如:签到、抽奖、看广告(对接穿山甲)、邀请用户、新用户有礼等。
+
+##### 责任描述
+
+- 完成 ICDP 项目 1.x 项目设计和开发
+- 根据不同需求完成并且实现
+- 解决项目中遇到的困难与难题并给出相关解决方案
+- 主导项目技术栈的大概方向和技术选型大概方向
+- 配合前端完成日常任务
+- 完成接口文档编写以及技术文档编写
+
+##### 技术描述
+
+- 完成超有惠系统上线任务
+- 完成超有惠服务器运维
+- 主导超有惠项目开发及设计
+- 完成超有惠项目的安卓 ui 展示及业务呈现 对接微信支付、个推、物流追踪等第三方 API 完善项目健壮性
+- 提供后台管理系统让商品管理变得更加简单
+- 搭建并完成测试环境使用 Jenkins、docker 完成自动化部署
+- 配合前端完成日常任务
+- 完成接口文档编写以及技术文档编写
+
+#### 云钞 Plus
+
+- 项目名称
+  云钞 Plus
+- 开发环境
+  IDEA2021，MySQL8.0，maven，git，Gitee，jdk1.8，Mac OS
+- 项目进度
+  项目以上线，官网: https://yunchaoplus.cn，GitHub: https://github.com/Curdata-project
+
+##### 项目架构
+
+SpringBoot、MyBatisPlus、Nginx、SpringCloud(Nacos)、Redis、Kafka、Jenkins 等
+
+##### 项目描述
+
+统一支付工具，通用、简单的支付接口，云钞 PLUS 依托母公司丰富的行业沉淀和技术积累，同步支持 数字人民币支付和传统聚合支付服务，为企业提供数字人民币支付与传统聚合支付全渠道融合服务，并 通过统一钱包账户为企业定制化多元化数字金融服务，未来将打通实物现金支付及兑换，实现全货币支 付服务。
+
+##### 责任描述
+
+- 负责设计数据结构、项目框架、技术选型。
+- 为项目支持自动化部署集成。
+- 完成《交易中心》所有相关核心功能:充值、提现、转账、消费类下单、消费类支付等核心接口。
+- 完成与银联文档交互、文档设计。
+- 完成项目风格约束，并指定相关规则为下游约束交互。
+- 完成《合伙人管理平台》《商户管理平台》《运营管理平台》。
+- 配合前端完成日常任务
+- 完成接口文档编写以及技术文档编写
+
+##### 技术描述
+
+- 使用 MyBatisPlus 对 MySQL 数据库进行管理和高效开发。 使用 SpringBoot + SpringCloud 作为项目主体架构。
+- 使用 RestFul 风格完成前端和后端之间的请求交互。
+- 使用 Redis 作为缓存数据库。
+- 使用 Nacos 作为服务注册中心，OpenFeign 作为微服务之间的远程通信
+- 使用 Kafka 消息队列中间件做异步通知以及异步教义结果处理。 使用 Jenkins+K8s+Docker 完成服务自动化部署集成。
+- 使用 APISIX 做服务替代 Nginx 来做请求分发
