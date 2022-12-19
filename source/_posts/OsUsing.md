@@ -1,4 +1,5 @@
 ---
+layout: osusing
 title: 系统使用
 date: 2022-06-16 13:03:18
 tags: 连载
@@ -12,13 +13,13 @@ tags: 连载
 
 ## 20220708
 
-- [SublimeText3连接SFTP](#SublimeText3连接SFTP)
+- [SublimeText3 连接 SFTP](#SublimeText3连接SFTP)
 
-## 20220708之前
+## 20220708 之前
 
-- [Windows微信多开](#微信多开)
+- [Windows 微信多开](#微信多开)
 
-- [科学使用Jetbrains](#科学使用Jetbrains)
+- [科学使用 Jetbrains](#科学使用Jetbrains)
 
 # Windows
 
@@ -42,9 +43,9 @@ start "" "D:\Tencent\WeChat\WeChat.exe" rem 需要多开的目标地址
 
 # 通用
 
-## SublimeText3连接SFTP
+## SublimeText3 连接 SFTP
 
-- 下载安装Sublime text3
+- 下载安装 Sublime text3
 
 - `Ctrl+\``打开控制台输入如下代码
 
@@ -60,19 +61,19 @@ import urllib.request,os,hashlib; h = '2915d1851351e5ee549c20394736b442' + '8bc5
 
 - 安装完成之后点击 `File -> SFTP/FTP -> MapToRemote 或者 Edit Server`
 
-- 自动生成一个sftp-config.json文件, 结合自己的情况配置就可以了
+- 自动生成一个 sftp-config.json 文件, 结合自己的情况配置就可以了
 
-## 科学使用Jetbrains
+## 科学使用 Jetbrains
 
 > 下面的功能没有特殊标注则表明支持`jetbrains`家族下面的所有系列产品均可通用~
 
 ### 使用`Reset`插件重置
 
-> 仅支持2021.3以下 建议使用2021.2.x版本
+> 仅支持 2021.3 以下 建议使用 2021.2.x 版本
 
-### 下载idea
+### 下载 idea
 
-> [点击下载idea](https://download.jetbrains.com/idea/ideaIU-2021.2.2.exe?_gl=1*1c4chbw*_ga*MTA0ODE1ODkwNS4xNjM1NTkwMzE3*_ga_V0XZL7QHEB*MTY0ODM4OTgxNC40LjEuMTY0ODM4OTgyMC4w&_ga=2.223952603.1391899983.1648389815-1048158905.1635590317)
+> [点击下载 idea](https://download.jetbrains.com/idea/ideaIU-2021.2.2.exe?_gl=1*1c4chbw*_ga*MTA0ODE1ODkwNS4xNjM1NTkwMzE3*_ga_V0XZL7QHEB*MTY0ODM4OTgxNC40LjEuMTY0ODM4OTgyMC4w&_ga=2.223952603.1391899983.1648389815-1048158905.1635590317)
 
 如果点击下载没有反应可以前往[官网](https://www.jetbrains.com/zh-cn/idea/download/other.html)下载
 
@@ -102,7 +103,6 @@ import urllib.request,os,hashlib; h = '2915d1851351e5ee549c20394736b442' + '8bc5
 
 > 如果没有试用三十天请自行降低版本
 
-
 ### 使用
 
 - 安装完成之后打开
@@ -127,4 +127,4 @@ import urllib.request,os,hashlib; h = '2915d1851351e5ee549c20394736b442' + '8bc5
 
 # Thanks
 
-- 感谢`CSDN`用户[ZFH__ZJ](https://blog.csdn.net/ZJ__ZFH)
+- 感谢`CSDN`用户[ZFH\_\_ZJ](https://blog.csdn.net/ZJ__ZFH)
