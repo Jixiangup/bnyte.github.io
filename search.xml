@@ -124,17 +124,17 @@
   </entry>
   <entry>
     <title>系统使用</title>
-    <url>/2022/06/16/use-os/</url>
+    <url>/2022/06/16/OsUsing/</url>
     <content><![CDATA[<p>本文主要连载一些系统包括<code>Windows</code>,<code>Linux</code>,<code>Mac</code>等系统日常使用中遇到或写的一些小脚本或者说一些使用技巧等等~</p>
 <span id="more"></span>
 
 <h1 id="Changelog"><a href="#Changelog" class="headerlink" title="Changelog"></a>Changelog</h1><h2 id="20220708"><a href="#20220708" class="headerlink" title="20220708"></a>20220708</h2><ul>
-<li><a href="#SublimeText3%E8%BF%9E%E6%8E%A5SFTP">SublimeText3连接SFTP</a></li>
+<li><a href="#SublimeText3%E8%BF%9E%E6%8E%A5SFTP">SublimeText3 连接 SFTP</a></li>
 </ul>
-<h2 id="20220708之前"><a href="#20220708之前" class="headerlink" title="20220708之前"></a>20220708之前</h2><ul>
-<li><p><a href="#%E5%BE%AE%E4%BF%A1%E5%A4%9A%E5%BC%80">Windows微信多开</a></p>
+<h2 id="20220708-之前"><a href="#20220708-之前" class="headerlink" title="20220708 之前"></a>20220708 之前</h2><ul>
+<li><p><a href="#%E5%BE%AE%E4%BF%A1%E5%A4%9A%E5%BC%80">Windows 微信多开</a></p>
 </li>
-<li><p><a href="#%E7%A7%91%E5%AD%A6%E4%BD%BF%E7%94%A8Jetbrains">科学使用Jetbrains</a></p>
+<li><p><a href="#%E7%A7%91%E5%AD%A6%E4%BD%BF%E7%94%A8Jetbrains">科学使用 Jetbrains</a></p>
 </li>
 </ul>
 <h1 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h1><h2 id="微信多开"><a href="#微信多开" class="headerlink" title="微信多开"></a>微信多开</h2><ul>
@@ -147,8 +147,8 @@
 </ul>
 <figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">TASKKILL /F /IM wechat.exe</span><br><span class="line"><span class="built_in">start</span> <span class="string">&quot;&quot;</span> <span class="string">&quot;D:\Tencent\WeChat\WeChat.exe&quot;</span> rem 需要多开的目标地址</span><br><span class="line"><span class="built_in">start</span> <span class="string">&quot;&quot;</span> <span class="string">&quot;D:\Tencent\WeChat\WeChat.exe&quot;</span> rem 需要多开的目标地址</span><br></pre></td></tr></table></figure>
 
-<h1 id="Mac"><a href="#Mac" class="headerlink" title="Mac"></a>Mac</h1><h1 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h1><h1 id="通用"><a href="#通用" class="headerlink" title="通用"></a>通用</h1><h2 id="SublimeText3连接SFTP"><a href="#SublimeText3连接SFTP" class="headerlink" title="SublimeText3连接SFTP"></a>SublimeText3连接SFTP</h2><ul>
-<li><p>下载安装Sublime text3</p>
+<h1 id="Mac"><a href="#Mac" class="headerlink" title="Mac"></a>Mac</h1><h1 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h1><h1 id="通用"><a href="#通用" class="headerlink" title="通用"></a>通用</h1><h2 id="SublimeText3-连接-SFTP"><a href="#SublimeText3-连接-SFTP" class="headerlink" title="SublimeText3 连接 SFTP"></a>SublimeText3 连接 SFTP</h2><ul>
+<li><p>下载安装 Sublime text3</p>
 </li>
 <li><p>&#96;Ctrl+`&#96;打开控制台输入如下代码</p>
 </li>
@@ -164,17 +164,17 @@
 </li>
 <li><p>安装完成之后点击 <code>File -&gt; SFTP/FTP -&gt; MapToRemote 或者 Edit Server</code></p>
 </li>
-<li><p>自动生成一个sftp-config.json文件, 结合自己的情况配置就可以了</p>
+<li><p>自动生成一个 sftp-config.json 文件, 结合自己的情况配置就可以了</p>
 </li>
 </ul>
-<h2 id="科学使用Jetbrains"><a href="#科学使用Jetbrains" class="headerlink" title="科学使用Jetbrains"></a>科学使用Jetbrains</h2><blockquote>
+<h2 id="科学使用-Jetbrains"><a href="#科学使用-Jetbrains" class="headerlink" title="科学使用 Jetbrains"></a>科学使用 Jetbrains</h2><blockquote>
 <p>下面的功能没有特殊标注则表明支持<code>jetbrains</code>家族下面的所有系列产品均可通用~</p>
 </blockquote>
 <h3 id="使用Reset插件重置"><a href="#使用Reset插件重置" class="headerlink" title="使用Reset插件重置"></a>使用<code>Reset</code>插件重置</h3><blockquote>
-<p>仅支持2021.3以下 建议使用2021.2.x版本</p>
+<p>仅支持 2021.3 以下 建议使用 2021.2.x 版本</p>
 </blockquote>
-<h3 id="下载idea"><a href="#下载idea" class="headerlink" title="下载idea"></a>下载idea</h3><blockquote>
-<p><a href="https://download.jetbrains.com/idea/ideaIU-2021.2.2.exe?_gl=1*1c4chbw*_ga*MTA0ODE1ODkwNS4xNjM1NTkwMzE3*_ga_V0XZL7QHEB*MTY0ODM4OTgxNC40LjEuMTY0ODM4OTgyMC4w&_ga=2.223952603.1391899983.1648389815-1048158905.1635590317">点击下载idea</a></p>
+<h3 id="下载-idea"><a href="#下载-idea" class="headerlink" title="下载 idea"></a>下载 idea</h3><blockquote>
+<p><a href="https://download.jetbrains.com/idea/ideaIU-2021.2.2.exe?_gl=1*1c4chbw*_ga*MTA0ODE1ODkwNS4xNjM1NTkwMzE3*_ga_V0XZL7QHEB*MTY0ODM4OTgxNC40LjEuMTY0ODM4OTgyMC4w&_ga=2.223952603.1391899983.1648389815-1048158905.1635590317">点击下载 idea</a></p>
 </blockquote>
 <p>如果点击下载没有反应可以前往<a href="https://www.jetbrains.com/zh-cn/idea/download/other.html">官网</a>下载</p>
 <p><img src="https://blogimg.bytestroll.com/blog_img/idea/1.png"></p>
@@ -224,5 +224,24 @@
       <tags>
         <tag>连载</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>React的使用</title>
+    <url>/2022/12/19/ReacttUsing/</url>
+    <content><![CDATA[<p>一些 React 中的使用经验, 会持续连载</p>
+<span id="more"></span>
+
+<h1 id="脚手架"><a href="#脚手架" class="headerlink" title="脚手架"></a>脚手架</h1><h2 id="Create-React-App"><a href="#Create-React-App" class="headerlink" title="Create React App"></a>Create React App</h2><h3 id="快速使用"><a href="#快速使用" class="headerlink" title="快速使用"></a>快速使用</h3><p>控制台面板使用以下命令快速创建 React App</p>
+<blockquote>
+<p>TIPS: 请自行替换 <code>&lt;app-name&gt;</code> 的值</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yarn create react-app &lt;app-name&gt;</span><br><span class="line"><span class="built_in">cd</span> &lt;app-name&gt;</span><br><span class="line">yarn start</span><br></pre></td></tr></table></figure>
+
+<p>访问: <code>http://127.0.0.1:3000</code> 或<a href="http://127.0.0.1:3000/">点击访问</a></p>
+<h3 id="脚本参数"><a href="#脚本参数" class="headerlink" title="脚本参数"></a>脚本参数</h3><h4 id="模版"><a href="#模版" class="headerlink" title="模版"></a>模版</h4><h5 id="TypeScript"><a href="#TypeScript" class="headerlink" title="TypeScript"></a>TypeScript</h5><blockquote>
+<p>参考 <a href="https://create-react-app.dev/docs/adding-typescript/">Create React App</a></p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yarn create react-app &lt;app-name&gt; --template typescript</span><br></pre></td></tr></table></figure>
+]]></content>
   </entry>
 </search>
