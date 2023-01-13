@@ -244,4 +244,31 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yarn create react-app &lt;app-name&gt; --template typescript</span><br></pre></td></tr></table></figure>
 ]]></content>
   </entry>
+  <entry>
+    <title>python使用经验技巧</title>
+    <url>/2023/01/04/python%E4%BD%BF%E7%94%A8%E7%BB%8F%E9%AA%8C%E6%8A%80%E5%B7%A7/</url>
+    <content><![CDATA[<p>这篇文章主要记录个人在 python 使用中遇到的一些问题记录和一些使用技巧，会持续连载</p>
+<span id="more"></span>
+
+<h1 id="Python-使用包管理"><a href="#Python-使用包管理" class="headerlink" title="Python 使用包管理"></a>Python 使用包管理</h1><ul>
+<li>安装 PIP</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 下载安装脚本</span></span><br><span class="line">curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py</span><br><span class="line"><span class="comment"># 运行安装脚本</span></span><br><span class="line">sudo python3 get-pip.py</span><br><span class="line"><span class="comment"># 确认是否安装成功</span></span><br><span class="line">pip --version</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>连载</tag>
+        <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>爬虫学习</title>
+    <url>/2023/01/04/%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[<p>由于最近对爬虫比较感兴趣(主要原因是别人会我不会，我难受，我可以用它不干啥 但是我必须得会～)，所以抽时间学了一下 python 爬虫，正好整合一下之前学习的 python，这篇文章会持续更新，记录一下自己的<code>python</code>爬虫经验。</p>
+<span id="more"></span>
+]]></content>
+      <tags>
+        <tag>学习</tag>
+        <tag>连载</tag>
+      </tags>
+  </entry>
 </search>
