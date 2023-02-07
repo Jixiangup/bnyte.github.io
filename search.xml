@@ -268,6 +268,8 @@
     <title>hadoop</title>
     <url>/2023/02/07/hadoop/</url>
     <content><![CDATA[<h1 id="Hadoop-为什么而生"><a href="#Hadoop-为什么而生" class="headerlink" title="Hadoop 为什么而生"></a>Hadoop 为什么而生</h1><p>Hadoop 的出生是为了解决<code>海量</code>的数据<code>计算和存储</code>而生</p>
+<span id="more"></span>
+
 <h1 id="Hadoop-的版本介绍"><a href="#Hadoop-的版本介绍" class="headerlink" title="Hadoop 的版本介绍"></a>Hadoop 的版本介绍</h1><table>
 <thead>
 <tr>
