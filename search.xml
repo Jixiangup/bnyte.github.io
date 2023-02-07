@@ -265,6 +265,426 @@
 ]]></content>
   </entry>
   <entry>
+    <title>hadoop</title>
+    <url>/2023/02/07/hadoop/</url>
+    <content><![CDATA[<h1 id="Hadoop-为什么而生"><a href="#Hadoop-为什么而生" class="headerlink" title="Hadoop 为什么而生"></a>Hadoop 为什么而生</h1><p>Hadoop 的出生是为了解决<code>海量</code>的数据<code>计算和存储</code>而生</p>
+<h1 id="Hadoop-的版本介绍"><a href="#Hadoop-的版本介绍" class="headerlink" title="Hadoop 的版本介绍"></a>Hadoop 的版本介绍</h1><table>
+<thead>
+<tr>
+<th>组件\版本</th>
+<th>V1.x</th>
+<th>V2.x</th>
+<th>V3.x</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>资源调度</td>
+<td>MapReduce</td>
+<td>YARN</td>
+<td>YARN</td>
+</tr>
+<tr>
+<td>计算组件</td>
+<td>MapReduce</td>
+<td>MapReduce</td>
+<td>MapReduce</td>
+</tr>
+<tr>
+<td>存储组件</td>
+<td>HDFS</td>
+<td>HDFS</td>
+<td>HDFS</td>
+</tr>
+<tr>
+<td>辅助组件</td>
+<td>COMMON</td>
+<td>COMMON</td>
+<td>COMMON</td>
+</tr>
+</tbody></table>
+<h1 id="YARN"><a href="#YARN" class="headerlink" title="YARN"></a>YARN</h1><p>yarn 作为资源调度组件</p>
+<h1 id="安装-Hadoop-集群"><a href="#安装-Hadoop-集群" class="headerlink" title="安装 Hadoop 集群"></a>安装 Hadoop 集群</h1><h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ul>
+<li>安装 epel-release</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yum install -y epel-release</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>安装 net-tool(最小软件操作系统则需要安装)</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yum install -y net-tool</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>安装 vim(最小软件操作系统则需要安装)</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yum install -y vim</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>安装 rsync(最小软件操作系统则需要安装)</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yum install -y rsync</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>关闭防火墙</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">systemctl stop firewalld</span><br><span class="line">systemctl disable firewalld.service</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>虚拟机创建自定义用户(不用执行)</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">useradd bnyte</span><br><span class="line">passwd $&#123;username&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>配置 bnyte 用户具有 root 权限(不用执行)</li>
+</ul>
+<blockquote>
+<p>修改&#x2F;etc&#x2F;sudoers 文件，在%wheel 这行下面添加一行，如下所示：</p>
+</blockquote>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="code"><pre><span class="line">vim /etc/sudoers</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># Allow root to run any commands anywhere</span></span></span><br><span class="line">root ALL=(ALL) ALL</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># Allows people in group wheel to run all commands</span></span></span><br><span class="line"><span class="meta prompt_">%</span><span class="language-bash">wheel ALL=(ALL) AL</span></span><br><span class="line"></span><br><span class="line">bnyte ALL=(ALL) NOPASSWD:ALL</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">注意：bnyte 这一行不要直接放到 root 行下面，因为所有用户都属于 wheel 组，你先</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">配置了 bnyte 具有免密功能，但是程序执行到%wheel 行时，该功能又被覆盖回需要</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">密码。所以 bnyte 要放到%wheel 这行下面。</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>为方便开发最好配置 hosts、配置高可用集群克隆多台模板机器运行并配置网卡</p>
+</blockquote>
+<ul>
+<li>安装 JDK</li>
+</ul>
+<p>略</p>
+<ul>
+<li>安装 HadoopV3.0.3</li>
+</ul>
+<blockquote>
+<p>配置 Hadoop 的<code>bin</code>和<code>sbin</code>到 path 即可</p>
+<p>配置文件</p>
+</blockquote>
+<p><code> vim /etc/profile.d/software.sh</code></p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">!/bin/bash</span></span><br><span class="line">export JAVA_HOME=/opt/module/jdk1.8.0_212</span><br><span class="line">export HADOOP_HOME=/opt/module/hadoop-3.1.3</span><br><span class="line"></span><br><span class="line">export PATH=$PATH:$JAVA_HOME/bin:$HADOOP_HOME/bin:$HADOOP_HOME/sbin</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>目录结构说明</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">bin: 存放对Hadoop相关服务（hdfs、yarn、MapReduce）进行操作的脚本</span><br><span class="line">etc: Hadoop的配置文件目录, 存放Hadoop的配置文件</span><br><span class="line">lib: 存放Hadoop的本地库(对数据进行压缩解压缩功能)</span><br><span class="line">sbin: 存放启动或停止Hadoop相关服务的脚本</span><br><span class="line">share: 存放Hadoop的依赖jar包,文档,和官方案例</span><br></pre></td></tr></table></figure>
+
+<h1 id="拷贝环境到多台机器"><a href="#拷贝环境到多台机器" class="headerlink" title="拷贝环境到多台机器"></a>拷贝环境到多台机器</h1><ul>
+<li>拷贝 Java 和 Hadoop 到目标机器(不用执行)</li>
+</ul>
+<blockquote>
+<p>通过 hostname 拷贝文件或文件夹</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">工具名称</span></span><br><span class="line">application_name=cptool</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">定义日志等级</span></span><br><span class="line">error=&quot;[error - $application_name]: &quot;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">获取需要拷贝的源路径</span></span><br><span class="line">source_dir=$1</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">文件不存在退出</span></span><br><span class="line">if [[ -z $source_dir ]]; then</span><br><span class="line">        echo $error source_dir cannot be null</span><br><span class="line">        exit</span><br><span class="line">else</span><br><span class="line">        # 输入文件路径存在，找该文件 文件存在</span><br><span class="line">        if [[ -d $source_dir || -f $source_dir ]]; then</span><br><span class="line">                for node_num in &#123;101..102&#125;</span><br><span class="line">                do</span><br><span class="line">                        node=hadoop$node_num</span><br><span class="line">                        scp -r $source_dir root@$node:$source_dir</span><br><span class="line">                done</span><br><span class="line">        # 文件不存在</span><br><span class="line">        else</span><br><span class="line">                echo $error filepath $source_dir not found</span><br><span class="line">        fi</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>配置 xsync</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">1. 判断参数个数</span></span><br><span class="line">if [ $# -lt 1 ]</span><br><span class="line">then</span><br><span class="line">    echo Not Enough Arguement!</span><br><span class="line">    exit;</span><br><span class="line">fi</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">2. 遍历集群所有机器</span></span><br><span class="line">for host in hadoop101 hadoop102</span><br><span class="line">do</span><br><span class="line">    echo ==================== $host ====================</span><br><span class="line">    #3. 遍历所有目录，挨个发送</span><br><span class="line">    for file in $@</span><br><span class="line">    do</span><br><span class="line">    #4. 判断文件是否存在</span><br><span class="line">    if [ -e $file ]</span><br><span class="line">    then</span><br><span class="line">        #5. 获取父目录</span><br><span class="line">        pdir=$(cd -P $(dirname $file); pwd)</span><br><span class="line">        #6. 获取当前文件的名称</span><br><span class="line">        fname=$(basename $file)</span><br><span class="line">        ssh $host &quot;mkdir -p $pdir&quot;</span><br><span class="line">        rsync -av $pdir/$fname $host:$pdir</span><br><span class="line">    else</span><br><span class="line">        echo $file does not exists!</span><br><span class="line">    fi</span><br><span class="line">    done</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>配置免密登录</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa</span><br><span class="line">ssh-copy-id &#123;hostname&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="运行-Hadoop"><a href="#运行-Hadoop" class="headerlink" title="运行 Hadoop"></a>运行 Hadoop</h1><h2 id="本地启动"><a href="#本地启动" class="headerlink" title="本地启动"></a>本地启动</h2><blockquote>
+<p>本地启动仅作为体验用 我发使用 hdfs yarn 等组件(单机)</p>
+</blockquote>
+<h3 id="案例-wordcount"><a href="#案例-wordcount" class="headerlink" title="案例(wordcount)"></a>案例(wordcount)</h3><ul>
+<li>在<code>$&#123;HADOOP_HOME&#125;</code>创建<code>input/word.txt</code>文件夹及文件并输入字符</li>
+</ul>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">bnyte</span><br><span class="line">liujixiang</span><br><span class="line">liuyang</span><br><span class="line">shuaige</span><br><span class="line">wozuishuaiqi</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>统计每个名字出现的次数</li>
+</ul>
+<p>执行计算</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hadoop jar share/hadoop/mapreduce/hadoop-mapreduce-examples-3.1.3.jar wordcount wcinput/ wcoutput</span><br></pre></td></tr></table></figure>
+
+<p><code>wordcount</code>: 统计字符次数</p>
+<p><code>wcinput/</code>: 指定需要统计的文件所在的目录</p>
+<p><code>wcoutput</code>: 指定结果输出目录(如果文件已经存在则会直接报错),<code>_SUCCESS</code>文件用作标识本次执行成功,没有其他数据.</p>
+<h2 id="伪集群启动"><a href="#伪集群启动" class="headerlink" title="伪集群启动"></a>伪集群启动</h2><blockquote>
+<p>伪集群可以使用 Hadoop 的所有功能且使用<code>SFTP</code>作为存储组件(单机)</p>
+</blockquote>
+<h2 id="集群启动"><a href="#集群启动" class="headerlink" title="集群启动"></a>集群启动</h2><blockquote>
+<p>使用所有 Hadoop 组件功能并且支持多节点、高可用(集群模式)</p>
+</blockquote>
+<h3 id="集群配置"><a href="#集群配置" class="headerlink" title="集群配置"></a>集群配置</h3><h4 id="集群规划"><a href="#集群规划" class="headerlink" title="集群规划"></a>集群规划</h4><p>Tips:</p>
+<blockquote>
+<p>NameNode 和 SecondaryNameNode 不要安装在同一台服务器</p>
+<p>ResourceManager 也很消耗内存，不要和 NameNode、SecondaryNameNode 配置在<br>同一台机器上。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>组件\机器</th>
+<th>hadoop100</th>
+<th>hadoop101</th>
+<th>hadoop102</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>hdfs</td>
+<td>NameNode\DataNode</td>
+<td>DataNode</td>
+<td>SecondaryNameNode\DataNode</td>
+</tr>
+<tr>
+<td>计算组件</td>
+<td>NodeManager</td>
+<td>ResourceManager\NodeManager</td>
+<td>NodeManager</td>
+</tr>
+</tbody></table>
+<h4 id="配置文件说明"><a href="#配置文件说明" class="headerlink" title="配置文件说明"></a>配置文件说明</h4><p>Hadoop 配置文件分两类：默认配置文件和自定义配置文件，只有用户想修改某一默认<br>配置值时，才需要修改自定义配置文件，更改相应属性值。</p>
+<ul>
+<li>默认配置文件</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>要获取的默认文件</th>
+<th>hadoop100</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>core-default.xml</code></td>
+<td>hadoop-common-3.1.3.jar&#x2F;core-default.xml</td>
+</tr>
+<tr>
+<td><code>hdfs-default.xml</code></td>
+<td>hadoop-hdfs-3.1.3.jar&#x2F;hdfs-default.xml</td>
+</tr>
+<tr>
+<td><code>yarn-default.xml</code></td>
+<td>hadoop-yarn-common-3.1.3.jar&#x2F;yarn-default.xml</td>
+</tr>
+<tr>
+<td><code>mapred-default.xml</code></td>
+<td>hadoop-mapreduce-client-core-3.1.3.jar&#x2F;mapred-default.xml</td>
+</tr>
+</tbody></table>
+<ul>
+<li>自定义配置文件</li>
+</ul>
+<p><code>core-site.xml</code>、<code>hdfs-site.xml</code>、<code>yarn-site.xml</code>、<code>mapred-site.xml</code> 四个配置文件存放在<code>$HADOOP_HOME/etc/hadoop</code> 这个路径上，用户可以根据项目需求重新进行修改配置。</p>
+<ul>
+<li>core-size.xml</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="meta">&lt;?xml-stylesheet type=<span class="string">&quot;text/xsl&quot;</span> href=<span class="string">&quot;configuration.xsl&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 指定 NameNode 的地址 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>fs.defaultFS<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>hdfs://hadoop100:8020<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 指定 hadoop 数据的存储目录 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>hadoop.tmp.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>/opt/module/hadoop-3.1.3/data<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 配置 HDFS 网页登录使用的静态用户为 atguigu --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>hadoop.http.staticuser.user<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>bnyte<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>hdfs-site.xml</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="meta">&lt;?xml-stylesheet type=<span class="string">&quot;text/xsl&quot;</span> href=<span class="string">&quot;configuration.xsl&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- nn web 端访问地址--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.namenode.http-address<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>hadoop100:9870<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 2nn web 端访问地址--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.namenode.secondary.http-address<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>hadoop102:9868<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>yarn-site.xml</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="meta">&lt;?xml-stylesheet type=<span class="string">&quot;text/xsl&quot;</span> href=<span class="string">&quot;configuration.xsl&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 指定 MR 走 shuffle --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.nodemanager.aux-services<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>mapreduce_shuffle<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 指定 ResourceManager 的地址--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.resourcemanager.hostname<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>hadoop101<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 环境变量的继承 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.nodemanager.env-whitelist<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>JAVA_HOME,HADOOP_COMMON_HOME,HADOOP_HDFS_HOME,HADOOP_CONF_DIR,CLASSPATH_PREPEND_DISTCACHE,HADOOP_YARN_HOME,HADOOP_MAPRED_HOME<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>mapred-site.xml</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="meta">&lt;?xml-stylesheet type=<span class="string">&quot;text/xsl&quot;</span> href=<span class="string">&quot;configuration.xsl&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 指定 MapReduce 程序运行在 Yarn 上 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>mapreduce.framework.name<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>yarn<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>将配置好的配置分发给其他的节点</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">xsync /opt/module/hadoop3.1.3/etc/hadoop/</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>配置&#x2F;opt&#x2F;module&#x2F;hadoop-3.1.3&#x2F;etc&#x2F;hadoop&#x2F;workers</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hadoop100</span><br><span class="line">hadoop101</span><br><span class="line">hadoop102</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意：这一步配置不可以有任何的空格</p>
+</blockquote>
+<h4 id="群起集群"><a href="#群起集群" class="headerlink" title="群起集群"></a>群起集群</h4><blockquote>
+<p>如果是第一次启动集群需要在<code>hadoop100</code>初始化<code>NameNode</code>(注意：格式<br>化 NameNode，会产生新的集群 id，导致 NameNode 和 DataNode 的集群 id 不一致，集群找<br>不到已往数据。如果集群在运行过程中报错，需要重新格式化 NameNode 的话，一定要先停<br>止 namenode 和 datanode 进程，并且要删除所有机器的 data 和 logs 目录，然后再进行格式<br>化。)</p>
+</blockquote>
+<ul>
+<li>初始化集群(第一次启动需要)</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hdfs namenode -format # 数据会被清空</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>启动集群</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sh $&#123;HADOOP_HOME&#125;/sbin/start-dfs.sh</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>如果是使用<code>root</code>做的操作可能会报如下错</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Starting namenodes on [hadoop100]</span><br><span class="line">ERROR: Attempting to operate on hdfs namenode as root</span><br><span class="line">ERROR: but there is no HDFS_NAMENODE_USER defined. Aborting operation.</span><br><span class="line">Starting datanodes</span><br><span class="line">ERROR: Attempting to operate on hdfs datanode as root</span><br><span class="line">ERROR: but there is no HDFS_DATANODE_USER defined. Aborting operation.</span><br><span class="line">Starting secondary namenodes [hadoop102]</span><br><span class="line">ERROR: Attempting to operate on hdfs secondarynamenode as root</span><br><span class="line">ERROR: but there is no HDFS_SECONDARYNAMENODE_USER defined. Aborting operation.</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>解决方案</p>
+</blockquote>
+<ul>
+<li>对于 start-dfs.sh 和 stop-dfs.sh 文件，添加下列参数</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">HDFS_DATANODE_USER=root</span><br><span class="line">HADOOP_SECURE_DN_USER=hdfs</span><br><span class="line">HDFS_NAMENODE_USER=root</span><br><span class="line">HDFS_SECONDARYNAMENODE_USER=root</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>对于 start-yarn.sh 和 stop-yarn.sh 文件，添加下列参数</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/usr/bin/env bash</span></span><br><span class="line">YARN_RESOURCEMANAGER_USER=root</span><br><span class="line">HADOOP_SECURE_DN_USER=yarn</span><br><span class="line">YARN_NODEMANAGER_USER=root</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在配置了 ResourceManager 的节点<code>hadoop101</code>启动 YARN</li>
+</ul>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="code"><pre><span class="line">./sbin/start-yarn.sh</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>Web 端访问<code>http://hadoop100:9870</code> HDFS 的 NameNode</p>
+</li>
+<li><p>Web 端访问<code>http://hadoop101:8088</code>查看 YARN 的 ResourceManager</p>
+</li>
+</ul>
+<h4 id="集群基本测试"><a href="#集群基本测试" class="headerlink" title="集群基本测试"></a>集群基本测试</h4><blockquote>
+<p>上传文件到集群</p>
+</blockquote>
+<ul>
+<li>上传小文件</li>
+</ul>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="code"><pre><span class="line">hadoop fs -mkdir /input  # 在hdfs创建文件夹</span><br><span class="line">hadoop fs -put $&#123;HADOOP_HOME&#125;/wcinput/word.txt /input # -put上传文件 本地文件 hdfs服务器路径</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查看上传结果</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1. 进入hdfs控制台界面`hadoop100:9870`</span><br><span class="line">2. Utilities -&gt; Browse the file system 查看文件系统</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查看 hdfs 文件保存路径，查看三台集群储存的数据确认高可用特性</li>
+</ul>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="code"><pre><span class="line">cd $&#123;HADOOP_HOME&#125;/data/dfs/data/current/BP-739053608-192.168.100.100-1650959465447/current/finalized/subdir0/subdir0/</span><br><span class="line">ll # 这个位置不带meta的文件就是数据文件了，在其他的集群也查看确认一下</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>从 hdfs 下载数据</li>
+</ul>
+<blockquote>
+<p>hadoop fs -get ${HDFS_FILEPATH} ${LOCAL_DOWNLOAD_PATH}</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hadoop fs -get /input/word.txt ./</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>执行 wordcount 程序</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># hadoop jar &#123;execute_jar&#125; &#123;jarpath&#125; &#123;type&#125; &#123;loadfile&#125; &#123;execution_result_path&#125;</span><br><span class="line">hadoop jar /opt/module/hadoop-3.1.3/share/hadoop/mapreduce/hadoop-mapreduce-examples-3.1.3.jar wordcount /input/word.txt /wc/output</span><br></pre></td></tr></table></figure>
+
+<h4 id="配置历史服务器"><a href="#配置历史服务器" class="headerlink" title="配置历史服务器"></a>配置历史服务器</h4><p>为了查看程序的历史运行情况，需要配置一下历史服务器。</p>
+<ul>
+<li>配置<code>mapred-site.xml</code></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;!-- 历史服务器端地址 --&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">    &lt;name&gt;mapreduce.jobhistory.address&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;hadoop100:10020&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;!-- 历史服务器 web 端地址 --&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">    &lt;name&gt;mapreduce.jobhistory.webapp.address&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;hadoop100:19888&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>分发配置</p>
+</li>
+<li><p>启动历史服务器</p>
+</li>
+</ul>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="code"><pre><span class="line">mapred --daemon start historyserver</span><br><span class="line">jps # 查看是否启动成功</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>访问历史服务器 web 端<code>http://hadoop100:19888/jobhistory</code></li>
+</ul>
+<h4 id="配置日志的聚集"><a href="#配置日志的聚集" class="headerlink" title="配置日志的聚集"></a>配置日志的聚集</h4><p>日志聚集概念：应用运行完成以后，将程序运行日志信息上传到 HDFS 系统上</p>
+<p><img src="/images/1.png"></p>
+<blockquote>
+<p>开启日志聚集功能，需要重新启动 NodeManager、ResourceManager 和 HistoryServer</p>
+</blockquote>
+<ul>
+<li>配置<code>yarn-site.xml</code></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;!-- 开启日志聚集功能 --&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;yarn.log-aggregation-enable&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;true&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">    &lt;!-- 设置日志聚集服务器地址 --&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;yarn.log.server.url&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;http://hadoop100:19888/jobhistory/logs&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">    &lt;!-- 设置日志保留时间为 7 天 --&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;yarn.log-aggregation.retain-seconds&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;604800&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>分发配置</p>
+</li>
+<li><p>关闭 NodeManager、ResourceManager、HistoryServer</p>
+</li>
+</ul>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="code"><pre><span class="line">stop-yarn.sh # 关闭yarn</span><br><span class="line">mapred --deamon stop historyservice</span><br><span class="line"></span><br><span class="line">start-yarn.sh # 启动yarn</span><br><span class="line">mapred --daemon start historyserver</span><br></pre></td></tr></table></figure>
+
+<h4 id="集群时间同步"><a href="#集群时间同步" class="headerlink" title="集群时间同步"></a>集群时间同步</h4><blockquote>
+<p>解决不同集群之中的所有集群时间不同这个时候 yarn 调度的时间不同其他节点发生冲突可能导致任务不会执行</p>
+<p>如果服务器在公网环境（能连接外网），可以不采用集群时间同步，因为服务器会定期 和公网时间进行校准；</p>
+<p>如果服务器在内网环境，必须要配置集群时间同步，否则时间久了，会产生时间偏差， 导致集群执行任务时间不同步。</p>
+</blockquote>
+<ul>
+<li>需求</li>
+</ul>
+<p>找一个机器，作为时间服务器，所有的机器与这台集群时间进行定时的同步，生产环境<br>根据任务对时间的准确程度要求周期同步。测试环境为了尽快看到效果，采用 1 分钟同步一<br>次。</p>
+<p><img src="/images/2.png"></p>
+<h5 id="时间服务器配置（必须-root-用户）"><a href="#时间服务器配置（必须-root-用户）" class="headerlink" title="时间服务器配置（必须 root 用户）"></a>时间服务器配置（必须 root 用户）</h5><ul>
+<li>查看所有节点 ntpd 服务状态和开机自启动状态</li>
+</ul>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="code"><pre><span class="line">systemctl status ntpd</span><br><span class="line">systemctl start ntpd</span><br><span class="line">systemctl is-enabled ntpd</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>修改 <code>hadoop100</code> 的 <code>ntp.conf</code> 配置文件</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo vim /etc/ntp.conf</span><br></pre></td></tr></table></figure>
+
+<p>修改 1（授权 192.168.100.0-192.168.100.255 网段上的所有机器可以从这台机器上查询和同步时间）</p>
+<blockquote>
+<p>restrict 192.168.100.0 mask 255.255.255.0 nomodify notrap</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">restrict 192.168.100.0 mask 255.255.255.0 nomodify notrap</span><br></pre></td></tr></table></figure>
+
+<p>修改 2（集群在局域网中，不使用其他互联网上的时间）</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">server 0.centos.pool.ntp.org iburst</span><br><span class="line">server 1.centos.pool.ntp.org iburst</span><br><span class="line">server 2.centos.pool.ntp.org iburst</span><br><span class="line">server 3.centos.pool.ntp.org iburst</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">将上面配置改为如下配置</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">server 0.centos.pool.ntp.org iburst</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">server 1.centos.pool.ntp.org iburst</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">server 2.centos.pool.ntp.org iburst</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">server 3.centos.pool.ntp.org iburst</span></span><br></pre></td></tr></table></figure>
+
+<p>添加 3（当该节点丢失网络连接，依然可以采用本地时间作为时间服务器为集群中的其他节点提供时间同步）</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">server 127.127.1.0</span><br><span class="line">fudge 127.127.1.0 stratum 10</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>修改 hadoop100 的&#x2F;etc&#x2F;sysconfig&#x2F;ntpd 文件</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo vim /etc/sysconfig/ntpd</span><br></pre></td></tr></table></figure>
+
+<p>增加内容如下（让硬件时间与系统时间一起同步）</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">SYNC_HWCLOCK=yes</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>重新启动 ntpd 服务</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo systemctl start ntpd</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>设置 ntpd 服务开机启动</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo systemctl enable ntpd</span><br></pre></td></tr></table></figure>
+
+<h5 id="其他机器配置（必须-root-用户）"><a href="#其他机器配置（必须-root-用户）" class="headerlink" title="其他机器配置（必须 root 用户）"></a>其他机器配置（必须 root 用户）</h5><ul>
+<li>关闭所有节点上 ntp 服务和自启动</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo systemctl stop ntpd</span><br><span class="line">sudo systemctl disable ntpd</span><br><span class="line">sudo systemctl stop ntpd</span><br><span class="line">sudo systemctl disable ntpd</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在其他机器配置 1 分钟与时间服务器同步一次</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo crontab -e</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>编写定时任务如下：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">*/1 * * * * /usr/sbin/ntpdate hadoop102</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>修改任意机器时间</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo date -s &quot;2021-9-11 11:11:11&quot;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>1 分钟后查看机器是否与时间服务器同步</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo date</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>学习</tag>
+        <tag>大数据</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>python使用经验技巧</title>
     <url>/2023/01/04/python%E4%BD%BF%E7%94%A8%E7%BB%8F%E9%AA%8C%E6%8A%80%E5%B7%A7/</url>
     <content><![CDATA[<p>这篇文章主要记录个人在 python 使用中遇到的一些问题记录和一些使用技巧，会持续连载</p>
