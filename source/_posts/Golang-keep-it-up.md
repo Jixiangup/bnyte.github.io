@@ -134,12 +134,18 @@ tags: [学习, 连载]
 go mod init bnyte.com/hello
 ```
 
-- 指定查找依赖项
+- 指定查找依赖项为本地
 
 > 模块名 = 模块给予当前路径的路径
 
 ```
  go mod edit -replace bnyte.com/greetings=../greetings
+```
+
+- 添加依赖
+
+```
+go get bnyte.com/greetings
 ```
 
 - 指定模块使用本地模块以及版本
