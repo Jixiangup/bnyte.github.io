@@ -67,12 +67,17 @@
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">go mod init bnyte.com/hello</span><br></pre></td></tr></table></figure>
 
 <ul>
-<li>指定查找依赖项</li>
+<li>指定查找依赖项为本地</li>
 </ul>
 <blockquote>
 <p>模块名 &#x3D; 模块给予当前路径的路径</p>
 </blockquote>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">go mod edit -replace bnyte.com/greetings=../greetings</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>添加依赖</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">go get bnyte.com/greetings</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li>指定模块使用本地模块以及版本</li>
