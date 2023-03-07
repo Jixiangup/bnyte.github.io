@@ -708,6 +708,18 @@
       </tags>
   </entry>
   <entry>
+    <title>对接支付平台</title>
+    <url>/2023/03/07/%E5%AF%B9%E6%8E%A5%E6%94%AF%E4%BB%98%E5%B9%B3%E5%8F%B0/</url>
+    <content><![CDATA[<p>本文主要连载各大支付平台的对接经验</p>
+<span id="more"></span>
+
+<h1 id="Apple-Store"><a href="#Apple-Store" class="headerlink" title="Apple Store"></a>Apple Store</h1><h1 id="Google-Play"><a href="#Google-Play" class="headerlink" title="Google Play"></a>Google Play</h1><h1 id="Alipay"><a href="#Alipay" class="headerlink" title="Alipay"></a>Alipay</h1><h1 id="WechatPay"><a href="#WechatPay" class="headerlink" title="WechatPay"></a>WechatPay</h1>]]></content>
+      <tags>
+        <tag>连载</tag>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>爬虫学习</title>
     <url>/2023/01/04/%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0/</url>
     <content><![CDATA[<p>由于最近对爬虫比较感兴趣(主要原因是别人会我不会，我难受，我可以用它不干啥 但是我必须得会～)，所以抽时间学了一下 python 爬虫，正好整合一下之前学习的 python，这篇文章会持续更新，记录一下自己的<code>python</code>爬虫经验。</p>

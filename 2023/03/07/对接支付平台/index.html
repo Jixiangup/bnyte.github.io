@@ -20,23 +20,29 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"blog.bnyte.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.12.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"default"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta property="og:type" content="blog">
-<meta property="og:title" content="大知闲闲">
-<meta property="og:url" content="https://blog.bnyte.com/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/index.html">
+    <meta name="description" content="本文主要连载各大支付平台的对接经验">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="对接支付平台">
+<meta property="og:url" content="https://blog.bnyte.com/2023/03/07/%E5%AF%B9%E6%8E%A5%E6%94%AF%E4%BB%98%E5%B9%B3%E5%8F%B0/index.html">
 <meta property="og:site_name" content="大知闲闲">
+<meta property="og:description" content="本文主要连载各大支付平台的对接经验">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-03-07T11:49:20.000Z">
+<meta property="article:modified_time" content="2023-03-07T03:52:14.392Z">
 <meta property="article:author" content="bnyte">
+<meta property="article:tag" content="连载">
+<meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://blog.bnyte.com/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/">
+<link rel="canonical" href="https://blog.bnyte.com/2023/03/07/%E5%AF%B9%E6%8E%A5%E6%94%AF%E4%BB%98%E5%B9%B3%E5%8F%B0/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"tags/大数据/index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://blog.bnyte.com/2023/03/07/%E5%AF%B9%E6%8E%A5%E6%94%AF%E4%BB%98%E5%B9%B3%E5%8F%B0/","path":"2023/03/07/对接支付平台/","title":"对接支付平台"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>标签: 大数据 | 大知闲闲</title>
+<title>对接支付平台 | 大知闲闲</title>
   
 
 
@@ -126,7 +132,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -139,6 +145,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Apple-Store"><span class="nav-number">1.</span> <span class="nav-text">Apple Store</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Google-Play"><span class="nav-number">2.</span> <span class="nav-text">Google Play</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Alipay"><span class="nav-number">3.</span> <span class="nav-text">Alipay</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#WechatPay"><span class="nav-number">4.</span> <span class="nav-text">WechatPay</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -214,51 +221,146 @@
 </noscript>
 
 
-    <div class="main-inner tag posts-collapse">
+    <div class="main-inner post posts-expand">
 
 
   
+
+
+<div class="post-block">
   
   
-  <div class="post-block">
-    <div class="post-content">
-      <div class="collection-title">
-        <h1 class="collection-header">大数据
-          <small>标签</small>
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.bnyte.com/2023/03/07/%E5%AF%B9%E6%8E%A5%E6%94%AF%E4%BB%98%E5%B9%B3%E5%8F%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://blogimg.bytestroll.com/avatar/bnyte.jpg">
+      <meta itemprop="name" content="bnyte">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="大知闲闲">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="对接支付平台 | 大知闲闲">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          对接支付平台
         </h1>
-      </div>
 
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
       
-    <div class="collection-year">
-      <span class="collection-header">2023</span>
+
+      <time title="创建时间：2023-03-07 11:49:20 / 修改时间：03:52:14" itemprop="dateCreated datePublished" datetime="2023-03-07T11:49:20+00:00">2023-03-07</time>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>24</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>本文主要连载各大支付平台的对接经验</p>
+<span id="more"></span>
+
+<h1 id="Apple-Store"><a href="#Apple-Store" class="headerlink" title="Apple Store"></a>Apple Store</h1><h1 id="Google-Play"><a href="#Google-Play" class="headerlink" title="Google Play"></a>Google Play</h1><h1 id="Alipay"><a href="#Alipay" class="headerlink" title="Alipay"></a>Alipay</h1><h1 id="WechatPay"><a href="#WechatPay" class="headerlink" title="WechatPay"></a>WechatPay</h1>
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2023-02-07T15:34:42+00:00"
-              content="2023-02-07">
-          02-07
-        </time>
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>bnyte
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://blog.bnyte.com/2023/03/07/%E5%AF%B9%E6%8E%A5%E6%94%AF%E4%BB%98%E5%B9%B3%E5%8F%B0/" title="对接支付平台">https://blog.bnyte.com/2023/03/07/对接支付平台/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://github.com/bnyte">
+          <span class="icon">
+            <i class="fab fa-github"></i>
+          </span>
+
+          <span class="label">GitHub</span>
+        </a>
       </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2023/02/07/hadoop/" itemprop="url">
-            <span itemprop="name">hadoop</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-    </div>
   </div>
-  
-  
-  
+</div>
 
+          <div class="post-tags">
+              <a href="/tags/%E8%BF%9E%E8%BD%BD/" rel="tag"># 连载</a>
+              <a href="/tags/Java/" rel="tag"># Java</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/02/07/hadoop/" rel="prev" title="hadoop">
+                  <i class="fa fa-chevron-left"></i> hadoop
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
 </div>
   </main>
 
@@ -315,7 +417,7 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.7.2/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
 
-<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"bnyte","repo":"blog","client_id":"a2379d35561105e84fdc","client_secret":"db18bc9c5f4e980f7d6dfb773a7d5545d0d5d7ee","admin_user":"bnyte","distraction_free_mode":false,"proxy":"https://shielded-brushlands-08810.herokuapp.com/https://github.com/login/oauth/access_token","language":"zh-CN","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.7.2/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"9473af4c8146ec43c7c13ba91a40ef6b"}</script>
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"bnyte","repo":"blog","client_id":"a2379d35561105e84fdc","client_secret":"db18bc9c5f4e980f7d6dfb773a7d5545d0d5d7ee","admin_user":"bnyte","distraction_free_mode":false,"proxy":"https://shielded-brushlands-08810.herokuapp.com/https://github.com/login/oauth/access_token","language":"zh-CN","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.7.2/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"f842d35e3460c26813beb3dc67b72758"}</script>
 <script src="/js/third-party/comments/gitalk.js"></script>
 
 </body>
