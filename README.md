@@ -23,3 +23,9 @@ npm run clean
 ```
 npm run server | npm run start
 ```
+
+- 写文章
+
+```
+hexo new [layout] <title>
+```
