@@ -128,6 +128,59 @@
       </tags>
   </entry>
   <entry>
+    <title>KeyCloak</title>
+    <url>/2023/04/28/KeyCloak/</url>
+    <content><![CDATA[<h1 id="KeyCloak"><a href="#KeyCloak" class="headerlink" title="KeyCloak"></a>KeyCloak</h1><p>Keycloak 是一个开源软件产品，旨在为现代的应用程序和服务，提供包含身份管理和访问管理功能的单点登录工具。截至 2018 年 3 月，红帽公司负责管理这一 JBoss 社区项目，并将其作为他们 RH-SSO 产品的上游项目。从概念的角度上来说，该工具的目的是，只用少量编码甚至不用编码，就能很容易地使应用程序和服务更安全。</p>
+<span id="more"></span>
+
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h3 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h3><h4 id="在你开始之前"><a href="#在你开始之前" class="headerlink" title="在你开始之前"></a>在你开始之前</h4><p>请确保安装了 Docker</p>
+<h4 id="启动-keycloak"><a href="#启动-keycloak" class="headerlink" title="启动 keycloak"></a>启动 keycloak</h4><p>初始化启动并暴露本地端口<code>8080</code>, 并指定管理员账号密码为<code>admin</code></p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker run -p --name keycloak 8080:8080 -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=admin quay.io/keycloak/keycloak start-dev</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>KEYCLOAK_ADMIN 管理后台账号</li>
+<li>KEYCLOAK_ADMIN_PASSWORD 管理后台密码</li>
+</ul>
+<h2 id="基础使用"><a href="#基础使用" class="headerlink" title="基础使用"></a>基础使用</h2><h3 id="登陆管理控制台"><a href="#登陆管理控制台" class="headerlink" title="登陆管理控制台"></a>登陆管理控制台</h3><ul>
+<li><p>转到 <a href="http://localhost:8080/admin">Keycloak 管理控制台</a>。</p>
+</li>
+<li><p>使用您之前创建的用户名和密码登录。</p>
+</li>
+</ul>
+<h3 id="创建-realm"><a href="#创建-realm" class="headerlink" title="创建 realm"></a>创建 realm</h3><p>Keycloak 中的 realm 相当于一个租户。每个领域都允许管理员创建隔离的应用程序和用户组。最初，Keycloak 包含一个名为 master. 仅将此领域用于管理 Keycloak，而不用于管理任何应用程序。</p>
+<p>使用这些步骤创建第一个 realm。</p>
+<ol>
+<li>打开 <a href="http://localhost:8080/admin">Keycloak 管理控制台</a>。</li>
+<li>单击左上角的<code>master</code>一词，然后单击<code>Create realm</code>，创建名为<code>myrealm</code>的一个新的 realm。</li>
+</ol>
+<p><img src="https://storage.bnyte.com/blog_img/keycloak/add-realm.png" alt="add-realm"></p>
+<h3 id="创建用户"><a href="#创建用户" class="headerlink" title="创建用户"></a>创建用户</h3><p>默认情况下 realm 是没有用户的，所以需要手动创建。</p>
+<ol>
+<li>打开 <a href="http://localhost:8080/admin">Keycloak 管理控制台</a>。</li>
+<li>单击左侧菜单中的<code>Users</code> -&gt; <code>Add user</code></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">创建用户时参数介绍</span><br><span class="line">Required user actions: 用户第一次登陆触发的行为，比如验证邮箱、更新密码等等。可以为空</span><br><span class="line">Username：用户名(用于登陆)</span><br><span class="line">Email: 邮箱地址，可以为空</span><br><span class="line">Email verified: 电子邮件地址是否已经得到验证</span><br><span class="line">First name: 姓?又或者名？这种定义很模糊，所以我也不确定，不过在最后获取到名称是 FirstName + LastName</span><br><span class="line">Last name</span><br><span class="line">Groups: 权限组，可以为空</span><br></pre></td></tr></table></figure>
+
+<p>创建用户之后需要设置密码之后才能登陆，所以还需要设置初始密码</p>
+<ol>
+<li>进入用户详情点击顶部的<code>Credentials</code>然后设置一个密码并且保存即可。</li>
+</ol>
+<h3 id="登陆账户控制台"><a href="#登陆账户控制台" class="headerlink" title="登陆账户控制台"></a>登陆账户控制台</h3><p>现在可以登陆到账户控制台以验证此用户是否已正确配置。</p>
+<ol>
+<li>打开 <a href="http://localhost:8080/realms/myrealm/account">Keycloak 帐户控制台</a>。</li>
+</ol>
+<blockquote>
+<p>当然如果你在创建<code>realm</code>时名称不是<code>myrealm</code>时你只需要按照以下方式改变这个路径就可以访问: <code>http://localhost:8080/realms/$&#123;realm&#125;/account</code></p>
+</blockquote>
+<ol start="2">
+<li>使用你之前创建的用户名和密码登录即可。</li>
+</ol>
+]]></content>
+      <tags>
+        <tag>学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>MongoDB</title>
     <url>/2023/03/22/MongoDB/</url>
     <content><![CDATA[<p>本文连载<code>mongodb</code>学习以及使用经验等相关笔记</p>
