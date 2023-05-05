@@ -20,16 +20,16 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"blog.bnyte.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.12.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"default"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="KeyCloakKeycloak 是一个开源软件产品，旨在为现代的应用程序和服务，提供包含身份管理和访问管理功能的单点登录工具。截至 2018 年 3 月，红帽公司负责管理这一 JBoss 社区项目，并将其作为他们 RH-SSO 产品的上游项目。从概念的角度上来说，该工具的目的是，只用少量编码甚至不用编码，就能很容易地使应用程序和服务更安全。">
+    <meta name="description" content="KeyCloakKeycloak 是一个开源软件产品，旨在为现代的应用程序和服务，提供包含身份管理和访问管理功能的单点登录工具。截至 2018 年 3 月，红帽公司负责管理这一 JBoss 社区项目，并将其作为他们 RH-SSO 产品的上游项目。从概念的角度上来说，该工具的目的是，只用少量编码甚至不用编码，就能很容易地使应用程序和服务更安全。 代码仓库">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="KeyCloak">
 <meta property="og:url" content="https://blog.bnyte.com/2023/04/28/KeyCloak/index.html">
 <meta property="og:site_name" content="大知闲闲">
-<meta property="og:description" content="KeyCloakKeycloak 是一个开源软件产品，旨在为现代的应用程序和服务，提供包含身份管理和访问管理功能的单点登录工具。截至 2018 年 3 月，红帽公司负责管理这一 JBoss 社区项目，并将其作为他们 RH-SSO 产品的上游项目。从概念的角度上来说，该工具的目的是，只用少量编码甚至不用编码，就能很容易地使应用程序和服务更安全。">
+<meta property="og:description" content="KeyCloakKeycloak 是一个开源软件产品，旨在为现代的应用程序和服务，提供包含身份管理和访问管理功能的单点登录工具。截至 2018 年 3 月，红帽公司负责管理这一 JBoss 社区项目，并将其作为他们 RH-SSO 产品的上游项目。从概念的角度上来说，该工具的目的是，只用少量编码甚至不用编码，就能很容易地使应用程序和服务更安全。 代码仓库">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://storage.bnyte.com/blog_img/keycloak/add-realm.png">
 <meta property="article:published_time" content="2023-04-28T17:33:39.000Z">
-<meta property="article:modified_time" content="2023-05-05T03:33:48.468Z">
+<meta property="article:modified_time" content="2023-05-05T03:35:41.826Z">
 <meta property="article:author" content="bnyte">
 <meta property="article:tag" content="学习">
 <meta name="twitter:card" content="summary">
@@ -269,7 +269,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-05-05 03:33:48" itemprop="dateModified" datetime="2023-05-05T03:33:48+00:00">2023-05-05</time>
+      <time title="修改时间：2023-05-05 03:35:41" itemprop="dateModified" datetime="2023-05-05T03:35:41+00:00">2023-05-05</time>
     </span>
 
   
@@ -279,7 +279,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>681</span>
+      <span>685</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -298,6 +298,7 @@
     
     <div class="post-body" itemprop="articleBody">
         <h1 id="KeyCloak"><a href="#KeyCloak" class="headerlink" title="KeyCloak"></a>KeyCloak</h1><p>Keycloak 是一个开源软件产品，旨在为现代的应用程序和服务，提供包含身份管理和访问管理功能的单点登录工具。截至 2018 年 3 月，红帽公司负责管理这一 JBoss 社区项目，并将其作为他们 RH-SSO 产品的上游项目。从概念的角度上来说，该工具的目的是，只用少量编码甚至不用编码，就能很容易地使应用程序和服务更安全。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/bnyte/keyclock-example">代码仓库</a></p>
 <span id="more"></span>
 
 <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h3 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h3><h4 id="在你开始之前"><a href="#在你开始之前" class="headerlink" title="在你开始之前"></a>在你开始之前</h4><p>请确保安装了 Docker</p>

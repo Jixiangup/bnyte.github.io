@@ -131,6 +131,7 @@
     <title>KeyCloak</title>
     <url>/2023/04/28/KeyCloak/</url>
     <content><![CDATA[<h1 id="KeyCloak"><a href="#KeyCloak" class="headerlink" title="KeyCloak"></a>KeyCloak</h1><p>Keycloak 是一个开源软件产品，旨在为现代的应用程序和服务，提供包含身份管理和访问管理功能的单点登录工具。截至 2018 年 3 月，红帽公司负责管理这一 JBoss 社区项目，并将其作为他们 RH-SSO 产品的上游项目。从概念的角度上来说，该工具的目的是，只用少量编码甚至不用编码，就能很容易地使应用程序和服务更安全。</p>
+<p><a href="https://github.com/bnyte/keyclock-example">代码仓库</a></p>
 <span id="more"></span>
 
 <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h3 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h3><h4 id="在你开始之前"><a href="#在你开始之前" class="headerlink" title="在你开始之前"></a>在你开始之前</h4><p>请确保安装了 Docker</p>
