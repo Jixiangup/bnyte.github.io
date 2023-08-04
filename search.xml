@@ -230,33 +230,6 @@
       </tags>
   </entry>
   <entry>
-    <title>MongoDB</title>
-    <url>/2023/03/22/MongoDB/</url>
-    <content><![CDATA[<p>本文连载<code>mongodb</code>学习以及使用经验等相关笔记</p>
-<span id="more"></span>
-
-<h1 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h1><h2 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h2><h3 id="运行容器"><a href="#运行容器" class="headerlink" title="运行容器"></a>运行容器</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker run -itd --name mongo -p 27017:27017 mongo --auth</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>参数解释</p>
-</blockquote>
-<ul>
-<li>–auth 则表示使用密码才能登录访问</li>
-</ul>
-<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><ul>
-<li>基础配置</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">进入容器 如果高于6.0版本使用 docker <span class="built_in">exec</span> -it mongo mongosh admin</span></span><br><span class="line">docker exec -it mongo mongo admin</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建一个名为 admin，密码为 123456 的超级用户。</span></span><br><span class="line">db.createUser(&#123; user:&#x27;admin&#x27;,pwd:&#x27;123456&#x27;,roles:[ &#123; role:&#x27;userAdminAnyDatabase&#x27;, db: &#x27;admin&#x27;&#125;,&quot;readWriteAnyDatabase&quot;]&#125;);</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">尝试使用上面创建的用户信息进行连接 返回1则表示成功</span></span><br><span class="line">db.auth(&#x27;admin&#x27;, &#x27;123456&#x27;);</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>配置远程访问</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it mongo bash</span><br><span class="line"></span><br><span class="line">apt-get update</span><br><span class="line"></span><br><span class="line">apt-get install vim</span><br><span class="line"><span class="comment">#修改 mongo 配置文件</span></span><br><span class="line">vim /etc/mongod.conf.orig</span><br></pre></td></tr></table></figure>
-
-<p>将其中的<code>bindIp: 127.0.0.1</code>注释掉<code># bindIp: 127.0.0.1</code> 或者改成 <code>bindIp: 0.0.0.0</code> 即可开启远程连接</p>
-]]></content>
-  </entry>
-  <entry>
     <title>系统使用</title>
     <url>/2022/06/16/OsUsing/</url>
     <content><![CDATA[<p>本文主要连载一些系统包括<code>Windows</code>,<code>Linux</code>,<code>Mac</code>等系统日常使用中遇到或写的一些小脚本或者说一些使用技巧等等~</p>
@@ -861,5 +834,32 @@
         <tag>学习</tag>
         <tag>连载</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>MongoDB</title>
+    <url>/2023/03/22/MongoDB/</url>
+    <content><![CDATA[<p>本文连载<code>mongodb</code>学习以及使用经验等相关笔记</p>
+<span id="more"></span>
+
+<h1 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h1><h2 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h2><h3 id="运行容器"><a href="#运行容器" class="headerlink" title="运行容器"></a>运行容器</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker run -itd --name mongo -p 27017:27017 mongo --auth</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>参数解释</p>
+</blockquote>
+<ul>
+<li>–auth 则表示使用密码才能登录访问</li>
+</ul>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><ul>
+<li>基础配置</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">进入容器 如果高于6.0版本使用 docker <span class="built_in">exec</span> -it mongo mongosh admin</span></span><br><span class="line">docker exec -it mongo mongo admin</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建一个名为 admin，密码为 123456 的超级用户。</span></span><br><span class="line">db.createUser(&#123; user:&#x27;admin&#x27;,pwd:&#x27;123456&#x27;,roles:[ &#123; role:&#x27;userAdminAnyDatabase&#x27;, db: &#x27;admin&#x27;&#125;,&quot;readWriteAnyDatabase&quot;]&#125;);</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">尝试使用上面创建的用户信息进行连接 返回1则表示成功</span></span><br><span class="line">db.auth(&#x27;admin&#x27;, &#x27;123456&#x27;);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>配置远程访问</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it mongo bash</span><br><span class="line"></span><br><span class="line">apt-get update</span><br><span class="line"></span><br><span class="line">apt-get install vim</span><br><span class="line"><span class="comment">#修改 mongo 配置文件</span></span><br><span class="line">vim /etc/mongod.conf.orig</span><br></pre></td></tr></table></figure>
+
+<p>将其中的<code>bindIp: 127.0.0.1</code>注释掉<code># bindIp: 127.0.0.1</code> 或者改成 <code>bindIp: 0.0.0.0</code> 即可开启远程连接</p>
+]]></content>
   </entry>
 </search>
