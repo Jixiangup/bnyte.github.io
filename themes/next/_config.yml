@@ -636,7 +636,7 @@ gitalk:
   # GitHub repo owner
   github_id: bnyte
   # Repository name to store issues
-  repo: main
+  repo: bnyte.github.io
   # GitHub Application Client ID
   client_id: a2379d35561105e84fdc
   # GitHub Application Client Secret
