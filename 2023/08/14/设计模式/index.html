@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.bnyte.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.12.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"default"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="平时在工作中，写业务有用到很多设计模式做封装，比如多支付平台，代理增强等等，今天一起做一个整合笔记。">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="设计模式">
+<meta property="og:url" content="https://blog.bnyte.com/2023/08/14/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/index.html">
+<meta property="og:site_name" content="大知闲闲">
+<meta property="og:description" content="平时在工作中，写业务有用到很多设计模式做封装，比如多支付平台，代理增强等等，今天一起做一个整合笔记。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-08-14T06:13:00.000Z">
+<meta property="article:modified_time" content="2023-08-14T06:48:54.074Z">
+<meta property="article:author" content="bnyte">
+<meta property="article:tag" content="设计模式">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://blog.bnyte.com/2023/08/14/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://blog.bnyte.com/2023/08/14/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/","path":"2023/08/14/设计模式/","title":"设计模式"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>设计模式 | 大知闲闲</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">大知闲闲</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">大知闲闲，小知间间；大言炎炎，小言詹詹。</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">设计模式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.1.</span> <span class="nav-text">创建型模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.1.1.</span> <span class="nav-text">工厂方法模式</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">2.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="bnyte"
+      src="https://blogimg.bytestroll.com/avatar/bnyte.jpg">
+  <p class="site-author-name" itemprop="name">bnyte</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/bnyte" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;bnyte" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:bnytezz@gmail.com" title="E-Mail → mailto:bnytezz@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://github.com/kushinae/koudi" title="https:&#x2F;&#x2F;github.com&#x2F;kushinae&#x2F;koudi" rel="noopener" target="_blank">电商系统(正在开发)</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://github.com/bnyte/azir" title="https:&#x2F;&#x2F;github.com&#x2F;bnyte&#x2F;azir" rel="noopener" target="_blank">大数据调度系统</a>
+        </li>
+    </ul>
+  </div>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/bnyte" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.bnyte.com/2023/08/14/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://blogimg.bytestroll.com/avatar/bnyte.jpg">
+      <meta itemprop="name" content="bnyte">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="大知闲闲">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="设计模式 | 大知闲闲">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          设计模式
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-08-14 06:13:00 / 修改时间：06:48:54" itemprop="dateCreated datePublished" datetime="2023-08-14T06:13:00+00:00">2023-08-14</time>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.7k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>6 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>平时在工作中，写业务有用到很多设计模式做封装，比如多<code>支付平台</code>，代理增强等等，今天一起做一个整合笔记。</p>
+<span id="more"></span>
+
+<h1 id="设计模式"><a href="#设计模式" class="headerlink" title="设计模式"></a>设计模式</h1><p>本章<a href="">设计模式代码</a></p>
+<p>什么是设计模式？引用一篇来自<a target="_blank" rel="noopener" href="https://openai.com/">ChatGPT</a>解释</p>
+<blockquote>
+<p>设计模式是一套通用的解决问题的方法或指导原则，用于在软件设计中处理常见的设计难题。它们是经过反复验证和实践的经验总结，可以帮助开发人员更有效地组织代码结构、提高代码质量、降低维护成本，并促进软件的可扩展性和可重用性。</p>
+<p>设计模式为软件开发者提供了一种共享的词汇表，使他们可以更容易地沟通和理解彼此的设计意图。这些模式强调了如何将不同组件和类组织成整体系统，以及如何处理系统中的交互和依赖关系。</p>
+<p>设计模式不仅仅关注代码的实现，还关注代码的架构和组织方式。它们不是一成不变的规则，而是灵活的指导原则，可以根据不同的情况进行调整和适应。</p>
+<p>总之，设计模式是一种在软件设计中的思维方式，它可以帮助开发者更好地解决复杂的设计问题，提高代码的可读性和可维护性，以及加速软件开发的过程。</p>
+</blockquote>
+<p>在我而言，我是这样理解</p>
+<blockquote>
+<p>首先我认为设计模式是一个为我们的业务或者功能结偶，对相同类型不同场景的业务做自定义功能，统一调用方式，让不同服务端收到不同调用方的请求时服务端通过不同的请求进而执行不同业务操作。</p>
+</blockquote>
+<ul>
+<li>阅读代码成本变高，如果为整个功能做<code>code review</code>时可能需要对整个完整实现全部了解一遍才能了解整个<code>设计模式</code>的功能作用。</li>
+<li>整体维护成本变高，但是具体功能维护成本变低。</li>
+<li>代码更简洁，如遇需求改动只需要改相对应的实现即可，迭代成本更低。</li>
+<li>统一API，让调用方不需要关注功能具体的实现或者寻找特定功能的特定API，统一暴露API，减小调用成本和API的阅读成本。</li>
+<li>更容易管理，针对不同实现的同一个API可以做更多的自定义功能实现。比如参数校验，API调用拦截等等。</li>
+</ul>
+<p>根据 <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-tw/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%8F%AF%E5%A4%8D%E7%94%A8%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%BD%AF%E4%BB%B6%E7%9A%84%E5%9F%BA%E7%A1%80">《設計模式：可復用物件導向軟體的基礎》（Design Patterns: Elements of Reusable Object-Oriented Software</a> 一书中，设计模式可以分为以下几类。</p>
+<ol>
+<li><p>创建型模式（Creational Patterns）：这些模式关注对象的创建过程，如何实例化对象或类的创建方法。</p>
+<ul>
+<li>工厂方法模式（Factory Method Pattern）</li>
+<li>抽象工厂模式（Abstract Factory Pattern）</li>
+<li>单例模式（Singleton Pattern）</li>
+<li>建造者模式（Builder Pattern）</li>
+<li>原型模式（Prototype Pattern）</li>
+<li>结构型模式（Structural Patterns）：这些模式关注如何组合类和对象，以形成更大的结构。</li>
+</ul>
+</li>
+<li><p>适配器模式（Adapter Pattern）</p>
+<ul>
+<li>桥接模式（Bridge Pattern）</li>
+<li>组合模式（Composite Pattern）</li>
+<li>装饰者模式（Decorator Pattern）</li>
+<li>外观模式（Facade Pattern）</li>
+<li>享元模式（Flyweight Pattern）</li>
+<li>代理模式（Proxy Pattern）</li>
+<li>行为型模式（Behavioral Patterns）：这些模式关注对象之间的通信和协作，以及如何分配职责。</li>
+</ul>
+</li>
+<li><p>责任链模式（Chain of Responsibility Pattern）</p>
+<ul>
+<li>命令模式（Command Pattern）</li>
+<li>解释器模式（Interpreter Pattern）</li>
+<li>迭代器模式（Iterator Pattern）</li>
+<li>中介者模式（Mediator Pattern）</li>
+<li>备忘录模式（Memento Pattern）</li>
+<li>观察者模式（Observer Pattern）</li>
+<li>状态模式（State Pattern）</li>
+<li>策略模式（Strategy Pattern）</li>
+<li>模板方法模式（Template Method Pattern）</li>
+<li>访问者模式（Visitor Pattern）</li>
+</ul>
+</li>
+</ol>
+<p>每种设计模式都有其特定的应用场景和解决问题的方法。使用适当的设计模式可以提高代码的可维护性、可扩展性和重用性。在实际开发中，根据问题的需求，选择合适的设计模式来组织代码是非常重要的。</p>
+<h2 id="创建型模式"><a href="#创建型模式" class="headerlink" title="创建型模式"></a>创建型模式</h2><h3 id="工厂方法模式"><a href="#工厂方法模式" class="headerlink" title="工厂方法模式"></a>工厂方法模式</h3><blockquote>
+<p>工厂方法模式是一种创建型设计模式，它将对象的创建委托给子类来处理，从而可以在不同的子类中创建不同类型的对象。让我们通过一个简单的案例来说明工厂方法模式。</p>
+</blockquote>
+<p>假设我们正在开发一个游戏，游戏中有多种角色（角色、怪物等）。每个角色都有不同的属性和行为。我们可以使用工厂方法模式来创建这些角色对象。</p>
+<p>首先，我们定义一个抽象的角色类 <code>Character</code>，其中包含角色的属性和行为：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.bnyte.designpatterns.creational.factorymethod;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> kaisa.liu</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 1.0.0</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Character</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 角色名称</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 角色健康值</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> Integer health;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Character</span><span class="params">(String name, Integer health)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">        <span class="built_in">this</span>.health = health;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">protected</span> String <span class="title function_">getAttackOutput</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;%s 正在攻击&quot;</span>.formatted(name);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">protected</span> String <span class="title function_">getDefendOutput</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;%s 正在防御&quot;</span>.formatted(name);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 抽象攻击方法</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">attack</span><span class="params">()</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 抽象防御方法</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">defend</span><span class="params">()</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后，创建具体的角色类，如 <code>Player</code>（玩家角色）和 <code>Monster</code>（怪物角色），它们继承自抽象类 <code>Character</code> 并实现了抽象方法：</p>
+<ul>
+<li><p><code>Player</code>（玩家角色）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.bnyte.designpatterns.creational.factorymethod;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 玩家角色</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> kaisa.liu</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 1.0.0</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Player</span> <span class="keyword">extends</span> <span class="title class_">Character</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Player</span><span class="params">(String name, Integer health)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>(name, health);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">attack</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(getAttackOutput());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">defend</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(getDefendOutput());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>Monster</code>（怪物角色）</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.bnyte.designpatterns.creational.factorymethod;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 怪物角色</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> kaisa.liu</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 1.0.0</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Monster</span> <span class="keyword">extends</span> <span class="title class_">Character</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Monster</span><span class="params">(String name, Integer health)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>(name, health);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">attack</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(getAttackOutput());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">defend</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(getDefendOutput());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>定义一个工厂接口 <code>CharacterFactory</code>，其中包含一个用于创建角色的工厂方法 <code>createCharacter</code>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.bnyte.designpatterns.creational.factorymethod;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 角色工厂API</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> kaisa.liu</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 1.0.0</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">CharacterFactory</span> &#123;</span><br><span class="line">    </span><br><span class="line">    Character <span class="title function_">createCharacter</span><span class="params">(String name, <span class="type">int</span> health)</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>实现具体的工厂类，如 <code>PlayerFactory</code> 和 <code>MonsterFactory</code>，它们分别用于创建玩家和怪物角色：</p>
+<ul>
+<li>PlayerFactory</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.bnyte.designpatterns.creational.factorymethod;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 玩家的工厂API实现</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> kaisa.liu</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 1.0.0</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">PlayerFactory</span> <span class="keyword">implements</span> <span class="title class_">CharacterFactory</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Character <span class="title function_">createCharacter</span><span class="params">(String name, <span class="type">int</span> health)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Player</span>(name, health);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>MonsterFactory</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.bnyte.designpatterns.creational.factorymethod;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 玩家的工厂API实现</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> kaisa.liu</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 1.0.0</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">PlayerFactory</span> <span class="keyword">implements</span> <span class="title class_">CharacterFactory</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Character <span class="title function_">createCharacter</span><span class="params">(String name, <span class="type">int</span> health)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Player</span>(name, health);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>现在可以使用工厂方法模式来创建不同类型的角色：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.bnyte.designpatterns.creational.factorymethod;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.junit.jupiter.api.Test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CharacterFactoryTest</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">MonsterFactory</span> <span class="variable">monsterFactory</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MonsterFactory</span>();</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">PlayerFactory</span> <span class="variable">playerFactory</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">PlayerFactory</span>();</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">createCharacter</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">Character</span> <span class="variable">superhuman</span> <span class="operator">=</span> monsterFactory.createCharacter(<span class="string">&quot;超人强&quot;</span>, <span class="number">200</span>);</span><br><span class="line">        superhuman.attack(); <span class="comment">// 超人强 正在攻击</span></span><br><span class="line">        superhuman.defend(); <span class="comment">// 超人强 正在防御</span></span><br><span class="line"></span><br><span class="line">        <span class="type">Character</span> <span class="variable">ggboy</span> <span class="operator">=</span> playerFactory.createCharacter(<span class="string">&quot;猪猪侠&quot;</span>, <span class="number">100</span>);</span><br><span class="line">        ggboy.attack(); <span class="comment">// 猪猪侠 正在攻击</span></span><br><span class="line">        ggboy.defend(); <span class="comment">// 猪猪侠 正在防御</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><blockquote>
+<p>参考文献不区分先后顺序，感谢这些优质的书籍和博主及出品方的资料提供。</p>
+</blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://openai.com/">ChatGPT 3.5 &amp; 4.0</a></li>
+<li><a target="_blank" rel="noopener" href="https://wikipedia.org/">维基百科</a></li>
+<li><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-tw/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%8F%AF%E5%A4%8D%E7%94%A8%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%BD%AF%E4%BB%B6%E7%9A%84%E5%9F%BA%E7%A1%80">《設計模式：可復用物件導向軟體的基礎》（Design Patterns: Elements of Reusable Object-Oriented Software</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>bnyte
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://blog.bnyte.com/2023/08/14/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" title="设计模式">https://blog.bnyte.com/2023/08/14/设计模式/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://github.com/bnyte">
+          <span class="icon">
+            <i class="fab fa-github"></i>
+          </span>
+
+          <span class="label">GitHub</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag"># 设计模式</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/04/28/KeyCloak/" rel="prev" title="KeyCloak">
+                  <i class="fa fa-chevron-left"></i> KeyCloak
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">湘ICP备2020024405号-1 <div class="upyun"> <a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.upyun.com/?utm_source=lianmeng&amp;utm_medium=referral"> <span>本网站由</span> <image style="display:inline;" src="https://cdn.jsdelivr.net/gh/ccknbc-backup/cdn/logo/upyun-blue.svg" alt="upyun" data-ll-status="loading" /> <span>提供CDN加速/云存储服务</span> </a> </div> </a>
+  </div>
+
+<div class="copyright">
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">大知闲闲</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">9k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">33 分钟</span>
+  </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.0/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.7.2/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"bnyte","repo":"blog","client_id":"a2379d35561105e84fdc","client_secret":"db18bc9c5f4e980f7d6dfb773a7d5545d0d5d7ee","admin_user":"bnyte","distraction_free_mode":false,"proxy":"https://shielded-brushlands-08810.herokuapp.com/https://github.com/login/oauth/access_token","language":"zh-CN","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.7.2/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"8e746ab20234724cbc0467e5b84b6e19"}</script>
+<script src="/js/third-party/comments/gitalk.js"></script>
+
+</body>
+</html>
