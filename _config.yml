@@ -3,17 +3,17 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 大知闲闲
-subtitle: '大知闲闲，小知间间；大言炎炎，小言詹詹。'
+title: Newhoze
+subtitle: 'Newhoze随记'
 description: ''
 keywords:
-author: bnyte
+author: newhoze
 language: zh-CN
-timezone: ''
+timezone: 'Etc/GMT+8'
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: https://blog.bnyte.com
+url: https://bnyte.github.io
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
