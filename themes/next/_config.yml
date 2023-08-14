@@ -185,7 +185,7 @@ links_settings:
 
 links:
   电商系统(正在开发): https://github.com/kushinae/koudi
-  大数据调度系统: https://github.com/bnyte/azir
+#  大数据调度系统: https://github.com/bnyte/azir
 
 # Table of Contents in the Sidebar
 # Front-matter variable (nonsupport wrap expand_all).
@@ -223,7 +223,7 @@ footer:
     color: "#ff0000"
 
   # If not defined, `author` from Hexo `_config.yml` will be used.
-  copyright: 大知闲闲
+  copyright: Newhoze
 
   # Powered by Hexo & NexT
   powered: false
@@ -636,7 +636,7 @@ gitalk:
   # GitHub repo owner
   github_id: bnyte
   # Repository name to store issues
-  repo: blog
+  repo: main
   # GitHub Application Client ID
   client_id: a2379d35561105e84fdc
   # GitHub Application Client Secret
