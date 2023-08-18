@@ -20,29 +20,29 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"bnyte.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.12.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"default"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="本文主要连载各大支付平台的对接经验，包含我的SDK库相关文档也会集成在这里。  Github: https:&#x2F;&#x2F;github.com&#x2F;bnyte&#x2F;payment">
+    <meta name="description" content="本文主要连载技术探索之旅系列。因为目前在做有关社交方面的功能需求，出现了在并发情况下用户更新文章之后而缓存没有和数据一致的情况，这一篇写一下我的解决方案和两种解决思路。">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="对接支付平台">
-<meta property="og:url" content="https://bnyte.github.io/2023/03/07/%E5%AF%B9%E6%8E%A5%E6%94%AF%E4%BB%98%E5%B9%B3%E5%8F%B0/index.html">
+<meta property="og:title" content="技术探索之旅の第一篇-缓存和DB的数据一致">
+<meta property="og:url" content="https://bnyte.github.io/2023/08/19/%E6%8A%80%E6%9C%AF%E6%8E%A2%E7%B4%A2%E4%B9%8B%E6%97%85%E3%81%AE%E7%AC%AC%E4%B8%80%E7%AF%87-%E7%BC%93%E5%AD%98%E5%92%8CDB%E7%9A%84%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4/index.html">
 <meta property="og:site_name" content="Newhoze">
-<meta property="og:description" content="本文主要连载各大支付平台的对接经验，包含我的SDK库相关文档也会集成在这里。  Github: https:&#x2F;&#x2F;github.com&#x2F;bnyte&#x2F;payment">
+<meta property="og:description" content="本文主要连载技术探索之旅系列。因为目前在做有关社交方面的功能需求，出现了在并发情况下用户更新文章之后而缓存没有和数据一致的情况，这一篇写一下我的解决方案和两种解决思路。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-03-07T19:49:20.000Z">
+<meta property="article:published_time" content="2023-08-19T05:04:13.000Z">
 <meta property="article:modified_time" content="2023-08-18T14:28:58.790Z">
 <meta property="article:author" content="newhoze">
 <meta property="article:tag" content="连载">
-<meta property="article:tag" content="Java">
+<meta property="article:tag" content="技术探索之旅">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://bnyte.github.io/2023/03/07/%E5%AF%B9%E6%8E%A5%E6%94%AF%E4%BB%98%E5%B9%B3%E5%8F%B0/">
+<link rel="canonical" href="https://bnyte.github.io/2023/08/19/%E6%8A%80%E6%9C%AF%E6%8E%A2%E7%B4%A2%E4%B9%8B%E6%97%85%E3%81%AE%E7%AC%AC%E4%B8%80%E7%AF%87-%E7%BC%93%E5%AD%98%E5%92%8CDB%E7%9A%84%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://bnyte.github.io/2023/03/07/%E5%AF%B9%E6%8E%A5%E6%94%AF%E4%BB%98%E5%B9%B3%E5%8F%B0/","path":"2023/03/07/对接支付平台/","title":"对接支付平台"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://bnyte.github.io/2023/08/19/%E6%8A%80%E6%9C%AF%E6%8E%A2%E7%B4%A2%E4%B9%8B%E6%97%85%E3%81%AE%E7%AC%AC%E4%B8%80%E7%AF%87-%E7%BC%93%E5%AD%98%E5%92%8CDB%E7%9A%84%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4/","path":"2023/08/19/技术探索之旅の第一篇-缓存和DB的数据一致/","title":"技术探索之旅の第一篇-缓存和DB的数据一致"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>对接支付平台 | Newhoze</title>
+<title>技术探索之旅の第一篇-缓存和DB的数据一致 | Newhoze</title>
   
 
 
@@ -145,7 +145,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Apple-Store"><span class="nav-number">1.</span> <span class="nav-text">Apple Store</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Google-Play"><span class="nav-number">2.</span> <span class="nav-text">Google Play</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Alipay"><span class="nav-number">3.</span> <span class="nav-text">Alipay</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#WechatPay"><span class="nav-number">4.</span> <span class="nav-text">WechatPay</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E5%92%8CDB%E7%9A%84%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4"><span class="nav-number">1.</span> <span class="nav-text">缓存和DB的数据一致</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%A4%E6%AD%A5%E5%88%A0%E9%99%A4-%E4%B8%A4%E6%AD%A5%E5%BB%B6%E8%BF%9F%E5%88%A0%E9%99%A4"><span class="nav-number">1.1.</span> <span class="nav-text">两步删除(两步延迟删除)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%A4%E6%AD%A5%E5%88%A0%E9%99%A4"><span class="nav-number">1.1.1.</span> <span class="nav-text">两步删除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%A4%E6%AD%A5%E5%BB%B6%E8%BF%9F%E5%88%A0%E9%99%A4"><span class="nav-number">1.1.2.</span> <span class="nav-text">两步延迟删除</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%88%E6%94%B9%E5%90%8E%E5%88%A0-Binlog-Canal%E8%A1%A5%E5%81%BF"><span class="nav-number">1.2.</span> <span class="nav-text">先改后删(Binlog Canal补偿)</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -229,7 +229,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://bnyte.github.io/2023/03/07/%E5%AF%B9%E6%8E%A5%E6%94%AF%E4%BB%98%E5%B9%B3%E5%8F%B0/">
+    <link itemprop="mainEntityOfPage" href="https://bnyte.github.io/2023/08/19/%E6%8A%80%E6%9C%AF%E6%8E%A2%E7%B4%A2%E4%B9%8B%E6%97%85%E3%81%AE%E7%AC%AC%E4%B8%80%E7%AF%87-%E7%BC%93%E5%AD%98%E5%92%8CDB%E7%9A%84%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://blogimg.bytestroll.com/avatar/bnyte.jpg">
@@ -242,12 +242,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="对接支付平台 | Newhoze">
+      <meta itemprop="name" content="技术探索之旅の第一篇-缓存和DB的数据一致 | Newhoze">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          对接支付平台
+          技术探索之旅の第一篇-缓存和DB的数据一致
         </h1>
 
         <div class="post-meta-container">
@@ -257,15 +257,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2023-03-07 11:49:20" itemprop="dateCreated datePublished" datetime="2023-03-07T11:49:20-08:00">2023-03-07</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-08-18 06:28:58" itemprop="dateModified" datetime="2023-08-18T06:28:58-08:00">2023-08-18</time>
+      <time title="创建时间：2023-08-18 21:04:13 / 修改时间：06:28:58" itemprop="dateCreated datePublished" datetime="2023-08-18T21:04:13-08:00">2023-08-18</time>
     </span>
 
   
@@ -275,14 +269,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>46</span>
+      <span>1.4k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
+      <span>5 分钟</span>
     </span>
 </div>
 
@@ -293,13 +287,52 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>本文主要连载各大支付平台的对接经验，包含我的<a target="_blank" rel="noopener" href="https://github.com/bnyte/payment">SDK库</a>相关文档也会集成在这里。</p>
-<blockquote>
-<p>Github: <a target="_blank" rel="noopener" href="https://github.com/bnyte/payment">https://github.com/bnyte/payment</a></p>
-</blockquote>
+        <p>本文主要连载<code>技术探索之旅</code>系列。因为目前在做有关社交方面的功能需求，出现了在并发情况下用户更新文章之后而<code>缓存</code>没有和数据一致的情况，这一篇写一下我的解决方案和两种解决思路。</p>
 <span id="more"></span>
 
-<h1 id="Apple-Store"><a href="#Apple-Store" class="headerlink" title="Apple Store"></a>Apple Store</h1><h1 id="Google-Play"><a href="#Google-Play" class="headerlink" title="Google Play"></a>Google Play</h1><h1 id="Alipay"><a href="#Alipay" class="headerlink" title="Alipay"></a>Alipay</h1><h1 id="WechatPay"><a href="#WechatPay" class="headerlink" title="WechatPay"></a>WechatPay</h1>
+<h1 id="缓存和DB的数据一致"><a href="#缓存和DB的数据一致" class="headerlink" title="缓存和DB的数据一致"></a>缓存和DB的数据一致</h1><p>先说一下<code>缓存和DB的数据不一致的场景</code></p>
+<p>通常情况下这种情况是在并发的情况下会出现，假定以下场景为并发下出现</p>
+<ol>
+<li>A线程请求更新目标数据</li>
+<li>B线程获取目标数据</li>
+<li>A线程在还没有更新数据到DB之前B线程数据已经从缓存拿到了数据，从而导致短暂性数据不一致(在A线程完成更新操作之后可以保持一致)</li>
+<li>A线程在还没有更新数据到Redis之前先删除了Redis的数据，而B线程此时没拿到缓存数据，进而从DB拿到了数据(旧数据)，在B线程拿到DB数据时再写入到缓存，从而导致数据在过期之前或下次更新之前存在长期不一致</li>
+</ol>
+<p>先说方案，我目前一共是想到两种方案，分别是<code>两步删除(两步延迟删除)</code>以及<code>先改后删(Binlog Canal补偿)</code>也就是主从 这两种，关于<a target="_blank" rel="noopener" href="https://github.com/alibaba/canal">阿里开源的Binlog Canal请点此参考</a>这里指的是最终一致，而并非强一致，我们通常在选用缓存技术的时候是为了增强系统的吞吐量，故而要保证强一致就需要确定他们的原子性，这样反而适得其反，所以这里不将这种方案计入其中。</p>
+<p>上面的问题反映了一个问题就是，因为A线程要写DB的情况存在，所以导致B线程的吞吐量(运行效率)一定会更快于A线程，所以才会出现脏数据(数据不一致)的情况，而我觉得如果想解决这个问题的方案就是最后一次写入缓存的数据一定是当前DB的最新数据</p>
+<h2 id="两步删除-两步延迟删除"><a href="#两步删除-两步延迟删除" class="headerlink" title="两步删除(两步延迟删除)"></a>两步删除(两步延迟删除)</h2><p>先说两步删除，这里先不说两步延迟删除，这个我认为是一种容灾手段，其目的并不是解决数据不一致的核心逻辑。</p>
+<h3 id="两步删除"><a href="#两步删除" class="headerlink" title="两步删除"></a>两步删除</h3><h4 id="实现逻辑"><a href="#实现逻辑" class="headerlink" title="实现逻辑"></a>实现逻辑</h4><ol>
+<li>在A线程请求更新目标数据之前先把缓存中的数据删除</li>
+<li>更新DB的数据</li>
+<li>再次删除缓存中的数据(防止A线程在执行第二步期间出现B线程并发获取缓存数据时，因为缓存在第一步被删除，这时候会从DB获取，然后直接更新到缓存，这样就出现了缓存不一致的情况)</li>
+<li>等到下一次B线程请求的时候缓存中没有数据这时候会去DB中获取数据，然后将其写入到DB进而保证数据的一致性</li>
+</ol>
+<h4 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h4><h5 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h5><ul>
+<li>可以保证数据的最终一致性(先排除极端情况，一会儿在两步延迟删除中会说到极端情况的解决方案)</li>
+</ul>
+<h5 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h5><ul>
+<li>在并发的情况下A如果还没有更新完DB的数据并且再次删除缓存数据时会出现短暂的读到脏数据的问题</li>
+</ul>
+<h3 id="两步延迟删除"><a href="#两步延迟删除" class="headerlink" title="两步延迟删除"></a>两步延迟删除</h3><p>这里为什么是两步延迟删除是因为，我们在第二次删除缓存中的数据时可能会出现比如抖动，进而请求超时数据没有删除，或者删除失败，删除报错的场景</p>
+<h4 id="实现逻辑-1"><a href="#实现逻辑-1" class="headerlink" title="实现逻辑"></a>实现逻辑</h4><ol>
+<li>在A线程请求更新目标数据之前先把缓存中的数据删除</li>
+<li>更新DB的数据</li>
+<li>发送延迟队列(具体延时时间需要根据更新逻辑的业务复杂度决定)异步再次删除缓存中的数据</li>
+<li>等到下一次B线程请求的时候缓存中没有数据这时候会去DB中获取数据(即使在并发情况下出现读到旧数据的情况，我们有延迟队列来保证最终一致)，然后将其写入到DB进而保证数据的一致性</li>
+</ol>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><h5 id="优点-1"><a href="#优点-1" class="headerlink" title="优点"></a>优点</h5><ul>
+<li>可以保证数据的最终一致性(有延迟队列的兜底)</li>
+<li>异步处理第二次删除，相比于<code>二步删除</code>在写操作时性能要好一点</li>
+</ul>
+<h5 id="缺点-1"><a href="#缺点-1" class="headerlink" title="缺点"></a>缺点</h5><ul>
+<li>在并发的情况下A如果还没有更新完DB的数据并且再次删除缓存数据时会出现短暂的读到脏数据的问题</li>
+<li>延迟队列如果时间间隔太长，那么这个最终一致的时间也就更长</li>
+<li>因为增加了消息队列中间件，系统变的更复杂了，故而可维护性更低了</li>
+<li>通常情况下我们为了更好的维护消息队列的消费者，导致消息队列这里有删除逻辑，而我们在更新DB的时候也有删除缓存的逻辑，出现了代码耦合</li>
+<li>需要处理消息丢失、消息积压的相关问题，这里即使消息被重复消费也无所谓，关于消息队列的相关问题，下次记录一下(下次一定)</li>
+</ul>
+<p>其实我觉得到这里其实差不多了，只是我感觉还有别的办法，一起在这里记录一下。</p>
+<h2 id="先改后删-Binlog-Canal补偿"><a href="#先改后删-Binlog-Canal补偿" class="headerlink" title="先改后删(Binlog Canal补偿)"></a>先改后删(Binlog Canal补偿)</h2>
     </div>
 
     
@@ -316,7 +349,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://bnyte.github.io/2023/03/07/%E5%AF%B9%E6%8E%A5%E6%94%AF%E4%BB%98%E5%B9%B3%E5%8F%B0/" title="对接支付平台">https://bnyte.github.io/2023/03/07/对接支付平台/</a>
+      <a href="https://bnyte.github.io/2023/08/19/%E6%8A%80%E6%9C%AF%E6%8E%A2%E7%B4%A2%E4%B9%8B%E6%97%85%E3%81%AE%E7%AC%AC%E4%B8%80%E7%AF%87-%E7%BC%93%E5%AD%98%E5%92%8CDB%E7%9A%84%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4/" title="技术探索之旅の第一篇-缓存和DB的数据一致">https://bnyte.github.io/2023/08/19/技术探索之旅の第一篇-缓存和DB的数据一致/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -343,21 +376,18 @@
 
           <div class="post-tags">
               <a href="/tags/%E8%BF%9E%E8%BD%BD/" rel="tag"># 连载</a>
-              <a href="/tags/Java/" rel="tag"># Java</a>
+              <a href="/tags/%E6%8A%80%E6%9C%AF%E6%8E%A2%E7%B4%A2%E4%B9%8B%E6%97%85/" rel="tag"># 技术探索之旅</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2023/02/07/hadoop/" rel="prev" title="hadoop">
-                  <i class="fa fa-chevron-left"></i> hadoop
+                <a href="/2023/08/14/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="prev" title="设计模式">
+                  <i class="fa fa-chevron-left"></i> 设计模式
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2023/03/22/MongoDB/" rel="next" title="MongoDB">
-                  MongoDB <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
@@ -426,7 +456,7 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.7.2/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
 
-<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"bnyte","repo":"bnyte.github.io","client_id":"a2379d35561105e84fdc","client_secret":"db18bc9c5f4e980f7d6dfb773a7d5545d0d5d7ee","admin_user":"bnyte","distraction_free_mode":false,"proxy":"https://shielded-brushlands-08810.herokuapp.com/https://github.com/login/oauth/access_token","language":"zh-CN","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.7.2/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"f842d35e3460c26813beb3dc67b72758"}</script>
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"bnyte","repo":"bnyte.github.io","client_id":"a2379d35561105e84fdc","client_secret":"db18bc9c5f4e980f7d6dfb773a7d5545d0d5d7ee","admin_user":"bnyte","distraction_free_mode":false,"proxy":"https://shielded-brushlands-08810.herokuapp.com/https://github.com/login/oauth/access_token","language":"zh-CN","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.7.2/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"e52f7945332c92f94de40646be021dd7"}</script>
 <script src="/js/third-party/comments/gitalk.js"></script>
 
 </body>
